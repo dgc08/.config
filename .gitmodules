@@ -1,0 +1,6 @@
+[submodule "doom"]
+	path = doom
+	url = https://github.com/dgc08/.doom.d
+[submodule "emacs"]
+	path = emacs
+	url = https://github.com/doomemacs/doomemacs
