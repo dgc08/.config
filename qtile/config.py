@@ -88,7 +88,6 @@ keys = [
 @hook.subscribe.startup_once
 def autostart():
     import subprocess
-    subprocess.Popen("qtile run-cmd -g 1 emacsclient -c".split())
     subprocess.Popen("qtile run-cmd -g 2 brave".split())
 
     # Add key bindings to switch VTs in Wayland.
@@ -118,16 +117,16 @@ for i in groups:
                 desc="Switch to group {}".format(i.name),
             ),
             # mod1 + shift + group number = switch to & move focused window to group
-            Key(
-                [mod, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(i.name),
-            ),
+            # Key(
+            #     [mod, "shift"],
+            #     i.name,
+            #     lazy.window.togroup(i.name, switch_group=True),
+            #     desc="Switch to & move focused window to group {}".format(i.name),
+            # ),
             # Or, use below if you prefer not to switch to that group.
-            # # mod1 + shift + group number = move focused window to group
-            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-            #     desc="move focused window to group {}".format(i.name)),
+            # mod1 + shift + group number = move focused window to group
+            Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
+                 desc="move focused window to group {}".format(i.name)),
         ]
     )
 

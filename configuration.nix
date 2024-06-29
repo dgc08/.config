@@ -44,14 +44,11 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.windowManager.qtile.enable = true;
-
-  # Configure keymap in X11
   services.xserver = {
+    enable = true;
+    displayManager.lightdm.enable = true;
+    windowManager.qtile.enable = true;
+
     layout = "de";
     xkbVariant = "deadacute";
   };
@@ -85,12 +82,18 @@
   # So i can set user shells
   programs.zsh.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dgc = {
     isNormalUser = true;
     description = "dgc";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
+  };
+
+  users.users.vs = {
+    isNormalUser = true;
+    description = "vs";
+    extraGroups = [ "networkmanager" ];
+    shell = pkgs.bash;
   };
 
   # Install firefox for the case of an emergency (probably just do nix-shell -p firefox)
@@ -107,9 +110,6 @@
     git
     emacs
     #vim # imagine (im just joking)
-    binutils
-    gcc
-    gnumake
 
     pkgs.home-manager
 
@@ -117,8 +117,7 @@
   ];
 
   services.emacs = {
-  enable = true;
-  defaultEditor = true;
+    enable = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are

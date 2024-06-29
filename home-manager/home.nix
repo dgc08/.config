@@ -1,28 +1,95 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
+  imports = [
+    inputs.nix-colors.homeManagerModules.default
+  ];
   home.username = "dgc";
   home.homeDirectory = "/home/dgc";
 
+
   home.stateVersion = "23.11"; # Please read the comment before changing.
+
+  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    alacritty
     brave
+
+    binutils
+    gcc
+    gnumake
     # more stuff here
 
     # required packages
     dconf
   ];
 
-  programs.git = {
-    enable = true;
-    userName = "Sinthoras39";
-    userEmail = "digc0820@gmail.com";
+  # Home Manager is pretty good at managing dotfiles. The primary way to manage
+  # plain files is through 'home.file'.
+  home.file = {
+    
   };
 
+  home.sessionVariables = {
+    EDITOR = "emacsclient -a 'emacs'";
+  };
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+
+  #####
+  ###
+  ## Alacritty
+  programs.alacritty.enable = true;
+  programs.alacritty.settings = {
+    colors = with config.colorScheme.colors; {
+      bright = {
+        black = "0x${base00}";
+        blue = "0x${base0D}";
+        cyan = "0x${base0C}";
+        green = "0x${base0B}";
+        magenta = "0x${base0E}";
+        red = "0x${base08}";
+        white = "0x${base06}";
+        yellow = "0x${base09}";
+      };
+      cursor = {
+        cursor = "0x${base06}";
+        text = "0x${base06}";
+      };
+      normal = {
+        black = "0x${base00}";
+        blue = "0x${base0D}";
+        cyan = "0x${base0C}";
+        green = "0x${base0B}";
+        magenta = "0x${base0E}";
+        red = "0x${base08}";
+        white = "0x${base06}";
+        yellow = "0x${base0A}";
+      };
+      primary = {
+        background = "0x${base00}";
+        foreground = "0x${base06}";
+      };
+    };
+  };
+
+  ###
+  ## Themes
+  qt.enable = true;
+  qt.style.name = "adwaita-dark";
+
+  gtk = {
+    enable = true;
+    theme.name = "adw-gtk3";
+    cursorTheme.name = "Bibata-Modern-Ice";
+    iconTheme.name = "GruvboxPlus";
+  };
+
+  ###
+  ## Zsh
   programs.zsh = {
     autocd = true;
     enable = true;
@@ -30,14 +97,17 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
+    ### Aliases
     shellAliases = {
       la = "ls -la";
       sys-update = "sudo nixos-rebuild switch";
       update = "home-manager switch";
       ed = "emacsclient -a 'emacs'";
+      qed = "emacsclient -nw -a 'emacs -nw'";
       emacs = "emacsclient -ca 'emacs'";
       sued = "sudoedit";
-      clean = "nix-collect-garbage -d";
+      clean = "nix-collect-garbage";
+      run = "nix-shell -p";
     };
     history = {
       size = 1000;
@@ -97,42 +167,11 @@
     ];
   };
 
-  qt.enable = true;
-  qt.style.name = "adwaita-dark";
-
-  gtk = {
+  ###
+  ## Git
+  programs.git = {
     enable = true;
-    theme.name = "adwaita-dark";
-    cursorTheme.name = "Bibata-Modern-Ice";
-    iconTheme.name = "GruvboxPlus";
+    userName = "Sinthoras39";
+    userEmail = "digc0820@gmail.com";
   };
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    
-  };
-
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/dgc/etc/profile.d/hm-session-vars.sh
-  #
-  home.sessionVariables = {
-    EDITOR = "emacsclient -a 'emacs'";
-  };
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
 }
