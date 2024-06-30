@@ -8,13 +8,25 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # Additional hardware settings
+      ./hardware.nix
     ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    #systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+    grub = {
+      enable = true;
+      devices = [ "nodev" ];
+      efiSupport = true;
+      useOSProber = true;
+    };
+  };
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -61,20 +73,22 @@
   #services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  nixpkgs.config.pulseaudio = true;
+  #security.rtkit.enable = true;
+  # services.pipewire = {
+  #   enable = true;
+  #   alsa.enable = true;
+  #   alsa.support32Bit = true;
+  #   pulse.enable = true;
+  #   # If you want to use JACK applications, uncomment this
+  #   #jack.enable = true;
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
+  #   # use the example session manager (no others are packaged yet so this is enabled by default,
+  #   # no need to redefine it in your config for now)
+  #   #media-session.enable = true;
+  # }
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -85,14 +99,14 @@
   users.users.dgc = {
     isNormalUser = true;
     description = "dgc";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "audio"];
     shell = pkgs.zsh;
   };
 
   users.users.vs = {
     isNormalUser = true;
     description = "vs";
-    extraGroups = [ "networkmanager" ];
+    extraGroups = [ "networkmanager" "audio"];
     shell = pkgs.bash;
   };
 
@@ -106,6 +120,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    pulseaudioFull
+
     wget
     git
     emacs
@@ -118,6 +134,17 @@
 
   services.emacs = {
     enable = true;
+  };
+  fonts.packages = [ pkgs.dejavu_fonts pkgs.noto-fonts-cjk-sans pkgs.bront_fonts];
+  fonts.fontconfig = {
+      enable = true;
+      defaultFonts = {
+        sansSerif = ["Bront DejaVu Sans"];
+        serif = ["Bront DejaVu Serif"];
+        monospace = ["Bront DejaVu Sans Mono"];
+      };
+      antialias = true;
+      hinting.enable = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are

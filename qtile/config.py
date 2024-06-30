@@ -31,8 +31,6 @@ from libqtile.utils import guess_terminal
 
 from libqtile import hook
 
-from datetime import datetime
-
 mod = "mod4"
 terminal = guess_terminal()
 
@@ -69,26 +67,28 @@ keys = [
         desc="Toggle between split and unsplit sides of stack",
     ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "BackSpace", lazy.spawn('rofi -show combi -combi-modi "window,drun,run,filebrowser"'), desc="Launch terminal"),
+
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod], "q", lazy.spawn("emacsclient -c"), desc="Texteditor"),
-    Key(
-        [mod],
-        "f",
-        lazy.window.toggle_fullscreen(),
-        desc="Toggle fullscreen on the focused window",
-    ),
-    Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
-    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "control"], "l", lazy.shutdown(), desc="Log out/Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-]
 
-@hook.subscribe.startup_once
-def autostart():
-    import subprocess
-    subprocess.Popen("qtile run-cmd -g 2 brave".split())
+    Key([mod], "q", lazy.spawn("emacsclient -c"), desc="Texteditor"),
+
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
+    Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
+
+    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
+
+    Key([mod], "l", lazy.spawn("dm-tool lock"), desc="Lock screen"),
+    Key([mod, "control"], "l", lazy.shutdown(), desc="Log out/Shutdown Qtile"),
+
+    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+
+    Key([mod], "y", lazy.spawn("playerctl previous"), desc="Previous media"),
+    Key([mod], "x", lazy.spawn("playerctl play-pause"), desc="Play/Pause"),
+    Key([mod], "c", lazy.spawn("playerctl next"), desc="Next media"),
+]
 
     # Add key bindings to switch VTs in Wayland.
 # We can't check qtile.core.name in default config as it is loaded before qtile is started
@@ -104,7 +104,7 @@ for vt in range(1, 8):
     )
 
 
-groups = [Group(i) for i in "123asdjkl"]
+groups = [Group(i) for i in "123asdhjk"]
 
 for i in groups:
     keys.extend(
@@ -130,18 +130,24 @@ for i in groups:
         ]
     )
 
+@hook.subscribe.startup_once
+def autostart():
+    import subprocess
+    subprocess.Popen("qtile run-cmd -g \"1\" brave".split())
+    subprocess.Popen("qtile run-cmd -g \"2\" emacsclient -c".split())
+
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),
+    layout.Tile(border_on_single=False, border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    layout.MonadTall(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    #layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    layout.TreeTab(),
+    #layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
-    # layout.MonadTall(),
     # layout.MonadWide(),
     # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
@@ -153,36 +159,20 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-# Get the current hour
-current_hour = datetime.now().hour
-
-# Determine the appropriate greeting based on the current hour
-if 5 <= current_hour < 12:
-    day_text = "Morgen"
-elif 12 <= current_hour < 18:
-    day_text = "Tag"
-else:
-    day_text = "Abend"
-
+from widgets import widgets
 screens = [
     Screen(
+        top=bar.Bar(
+            widgets,
+            24,
+            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+        ),
         bottom=bar.Bar(
             [
-                widget.CurrentLayout(),
                 widget.GroupBox(),
+                widget.TextBox(" || "),
                 widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.TextBox(f"Hallo und guten {day_text}", foreground="#31cccc"),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                widget.Systray(),
-                widget.Clock(format="%a %d-%m-%Y %H:%M %p"),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
