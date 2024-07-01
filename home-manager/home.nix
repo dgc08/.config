@@ -17,11 +17,15 @@
   home.packages = with pkgs; [
     brave
     vesktop
+    
+    mangohud
+
     rofi
 
     ffmpeg
     yt-dlp
 
+    networkmanagerapplet
     pavucontrol
     playerctl
     vlc
@@ -32,11 +36,11 @@
     file
     killall
 
-    gcc
-    gnumake
-    # more stuff here
+    #gcc
+    #gnumake
+    ## more stuff here
 
-    # required packages
+    ## required packages
     dconf
   ];
 
@@ -54,6 +58,17 @@
   programs.home-manager.enable = true;
 
   #####
+  ###
+  ## MIME
+  xdg.mimeApps = {
+    enable = true;
+    associations.added = {
+      "inode/directory" = ["emacsclient.desktop" "emacs.desktop"];
+    };
+    defaultApplications = {
+      "inode/directory" = ["emacsclient.desktop"];
+    };
+  };
   ###
   ## Alacritty
   programs.alacritty.enable = true;
@@ -97,7 +112,7 @@
 
   gtk = {
     enable = true;
-    theme.name = "adw-gtk3";
+    theme.name = "adwaita-dark";
     cursorTheme.name = "Bibata-Modern-Ice";
     iconTheme.name = "GruvboxPlus";
   };
@@ -198,19 +213,19 @@
   };
   ### Rofi
   ##
-  home.file.".config/rofi/config.rasi".text = ''
+  home.file.".config/rofi/config.rasi".text = with config.colorScheme.colors; ''
     /*******************************************************************************
     * ROUNDED THEME FOR ROFI
     * User                 : LR-Tech
     * Theme Repo           : https://github.com/lr-tech/rofi-themes-collection
     *******************************************************************************/
     * {
-      bg0:    #212121F2;
+      bg0:    #${base00}F2;
       bg1:    #2A2A2A;
       bg2:    #3D3D3D80;
       bg3:    #F57C00F2;
       fg0:    #E6E6E6;
-      fg1:    #FFFFFF;
+      fg1:    #${base06};
       fg2:    #969696;
       fg3:    #3D3D3D;
     }

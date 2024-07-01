@@ -32,7 +32,7 @@ from libqtile.utils import guess_terminal
 from libqtile import hook
 
 mod = "mod4"
-terminal = guess_terminal()
+terminal = "alacritty"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -67,7 +67,7 @@ keys = [
         desc="Toggle between split and unsplit sides of stack",
     ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "BackSpace", lazy.spawn('rofi -show combi -combi-modi "window,drun,run,filebrowser"'), desc="Launch terminal"),
+    Key([mod], "BackSpace", lazy.spawn('rofi -show combi -combi-modi "drun,window,run,filebrowser"'), desc="Launch terminal"),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
@@ -104,7 +104,7 @@ for vt in range(1, 8):
     )
 
 
-groups = [Group(i) for i in "123asdhjk"]
+groups = [Group(i) for i in "123asdhjkm"]
 
 for i in groups:
     keys.extend(
@@ -134,7 +134,7 @@ for i in groups:
 def autostart():
     import subprocess
     subprocess.Popen("qtile run-cmd -g \"1\" brave".split())
-    subprocess.Popen("qtile run-cmd -g \"2\" emacsclient -c".split())
+    subprocess.Popen("qtile run-cmd -g \"2\" emacsclient -ca \"emacs\"".split())
 
 layouts = [
     layout.Tile(border_on_single=False, border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
