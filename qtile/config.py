@@ -66,14 +66,16 @@ keys = [
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
     ),
+    Key([mod, "shift"], "Return", lazy.layout.normalize()),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "BackSpace", lazy.spawn('rofi -show combi -combi-modi "drun,window,run,filebrowser"'), desc="Launch terminal"),
+    Key([mod], "BackSpace", lazy.spawn('rofi -show combi -combi-modi "window,drun,run,filebrowser"'), desc="Rofi application launcher"),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
 
     Key([mod], "q", lazy.spawn("emacsclient -c"), desc="Texteditor"),
+    Key([mod], "e", lazy.spawn("emacsclient --eval \"(emacs-everywhere)\""), desc="Emacs everywhere"),
 
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
     Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
@@ -86,8 +88,10 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 
     Key([mod], "y", lazy.spawn("playerctl previous"), desc="Previous media"),
+    Key([mod, "control"], "y", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -1%"), desc="Dec volume"),
     Key([mod], "x", lazy.spawn("playerctl play-pause"), desc="Play/Pause"),
     Key([mod], "c", lazy.spawn("playerctl next"), desc="Next media"),
+    Key([mod, "control"], "c", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +1%"), desc="Inc volume"),
 ]
 
     # Add key bindings to switch VTs in Wayland.
@@ -104,7 +108,7 @@ for vt in range(1, 8):
     )
 
 
-groups = [Group(i) for i in "123asdhjkm"]
+groups = [Group(i) for i in "123asdhjk"]
 
 for i in groups:
     keys.extend(
@@ -133,18 +137,18 @@ for i in groups:
 @hook.subscribe.startup_once
 def autostart():
     import subprocess
-    subprocess.Popen("qtile run-cmd -g \"1\" brave".split())
-    subprocess.Popen("qtile run-cmd -g \"2\" emacsclient -ca \"emacs\"".split())
+    subprocess.Popen("qtile run-cmd -g 1 brave".split(" "))
+    subprocess.Popen("qtile run-cmd -g 2 emacsclient -ca \"emacs\"".split(" "))
 
 layouts = [
     layout.Tile(border_on_single=False, border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
     layout.MonadTall(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
     #layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
     layout.TreeTab(),
-    #layout.Max(),
+    # layout.Max(),
     # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
+    # layout.Stack(num_stacks=4),
+    layout.Bsp(),
     # layout.Matrix(),
     # layout.MonadWide(),
     # layout.RatioTile(),

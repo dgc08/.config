@@ -1,5 +1,19 @@
 { config, pkgs, inputs, ... }:
-
+let
+  soundux = import ./extra_modules/soundux.nix { inherit pkgs; };
+  ###
+  ## Aliases
+  aliases = {
+    la = "ls -la";
+    sys-update = "sudo nixos-rebuild switch";
+    update = "home-manager switch";
+    ed = "emacsclient -r -a 'emacs'";
+    qed = "emacsclient -nw -a 'emacs -nw'";
+    sued = "sudoedit";
+    clean = "nix-collect-garbage";
+    run = "nix-shell -p";
+  };
+in
 {
   imports = [
     inputs.nix-colors.homeManagerModules.default
@@ -18,7 +32,7 @@
     brave
     vesktop
     
-    mangohud
+    redshift
 
     rofi
 
@@ -122,7 +136,7 @@
   xsession = {
     enable = true;
     initExtra = ''
-      xinput set-prop "Logitech G502 HERO Gaming Mouse" "Coordinate Transformation Matrix" 0.25 0 0 0 0.25 0 0 0 1
+      xinput set-prop "Logitech G502 HERO Gaming Mouse" "Coordinate Transformation Matrix" 0.45 0 0 0 0.45 0 0 0 1
     '';
   };
 
@@ -135,17 +149,8 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    ### Aliases
-    shellAliases = {
-      la = "ls -la";
-      sys-update = "sudo nixos-rebuild switch";
-      update = "home-manager switch";
-      ed = "emacsclient -r -a 'emacs'";
-      qed = "emacsclient -nw -a 'emacs -nw'";
-      sued = "sudoedit";
-      clean = "nix-collect-garbage";
-      run = "nix-shell -p";
-    };
+    shellAliases = aliases;
+
     history = {
       size = 1000;
       path = "${config.xdg.dataHome}/zsh/history";

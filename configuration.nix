@@ -115,7 +115,15 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.config.common.default = "gtk";
+  services.flatpak.enable = true;
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+  ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -133,24 +141,31 @@
   ];
 
   # Gaming stuff
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    package = pkgs.steam.override {
+      extraPkgs = pkgs: with pkgs; [
+        libkrb5
+        keyutils
+      ];
+    };
+};
   programs.steam.gamescopeSession.enable = true;
-
   programs.gamemode.enable = true;
 
   services.emacs = {
     enable = true;
   };
-  fonts.packages = [ pkgs.dejavu_fonts pkgs.noto-fonts-cjk-sans pkgs.bront_fonts];
+  fonts.packages = with pkgs; [  noto-fonts-cjk-sans ubuntu_font_family];
   fonts.fontconfig = {
       enable = true;
       defaultFonts = {
-        sansSerif = ["Bront DejaVu Sans"];
-        serif = ["Bront DejaVu Serif"];
-        monospace = ["Bront DejaVu Sans Mono"];
+        sansSerif = ["Ubuntu Bold"];
+        serif = ["Ubuntu Bold"];
+        monospace = ["Ubuntu Mono Bold"];
       };
-      antialias = true;
-      hinting.enable = true;
   };
 
   system.stateVersion = "24.05"; # Did you read the comment?
