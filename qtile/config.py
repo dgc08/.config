@@ -69,6 +69,7 @@ keys = [
     Key([mod, "shift"], "Return", lazy.layout.normalize()),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "BackSpace", lazy.spawn('rofi -show combi -combi-modi "window,drun,run,filebrowser"'), desc="Rofi application launcher"),
+    Key([], "Print", lazy.spawn('flameshot gui'), desc="take screenshot"),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
@@ -137,8 +138,7 @@ for i in groups:
 @hook.subscribe.startup_once
 def autostart():
     import subprocess
-    subprocess.Popen("qtile run-cmd -g 1 brave".split(" "))
-    subprocess.Popen("qtile run-cmd -g 2 emacsclient -ca \"emacs\"".split(" "))
+    subprocess.call([os.path.expanduser('~/.config/qtile/autostart.sh')])
 
 layouts = [
     layout.Tile(border_on_single=False, border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),

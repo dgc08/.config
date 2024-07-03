@@ -158,7 +158,7 @@
   services.emacs = {
     enable = true;
   };
-  fonts.packages = with pkgs; [  noto-fonts-cjk-sans ubuntu_font_family];
+  fonts.packages = with pkgs; [ noto-fonts-cjk-sans ubuntu_font_family ];
   fonts.fontconfig = {
       enable = true;
       defaultFonts = {
@@ -166,6 +166,8 @@
         serif = ["Ubuntu Bold"];
         monospace = ["Ubuntu Mono Bold"];
       };
+      hinting.enable = true;
+      antialias = true;
   };
 
   system.stateVersion = "24.05"; # Did you read the comment?

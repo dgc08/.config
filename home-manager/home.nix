@@ -1,6 +1,6 @@
 { config, pkgs, inputs, ... }:
 let
-  soundux = import ./extra_modules/soundux.nix { inherit pkgs; };
+  wallpaperPath = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
   ###
   ## Aliases
   aliases = {
@@ -10,8 +10,13 @@ let
     ed = "emacsclient -r -a 'emacs'";
     qed = "emacsclient -nw -a 'emacs -nw'";
     sued = "sudoedit";
-    clean = "nix-collect-garbage";
+    clean = "(yes | rm /tmp/* -r) & nix-collect-garbage";
     run = "nix-shell -p";
+  };
+  ###
+  ## Session Vars
+  SessionVariables = {
+    EDITOR = "emacsclient -r -a 'emacs'";
   };
 in
 {
@@ -31,8 +36,9 @@ in
   home.packages = with pkgs; [
     brave
     vesktop
-    
+    whatsapp-for-linux
     redshift
+    flameshot
 
     rofi
 
@@ -56,6 +62,7 @@ in
 
     ## required packages
     dconf
+    feh
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -64,9 +71,7 @@ in
     
   };
 
-  home.sessionVariables = {
-    EDITOR = "emacsclient -r -a 'emacs'";
-  };
+  home.sessionVariables = SessionVariables;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -87,7 +92,7 @@ in
   ## Alacritty
   programs.alacritty.enable = true;
   programs.alacritty.settings = {
-    colors = with config.colorScheme.colors; {
+    colors = with config.colorScheme.palette; {
       bright = {
         black = "0x${base00}";
         blue = "0x${base0D}";
@@ -121,14 +126,34 @@ in
 
   ###
   ## Themes
-  qt.enable = true;
-  qt.style.name = "adwaita-dark";
+  #services.xserver.desktopManager.wallpaper.type = "fill";
+  home.file.".background-image".source = wallpaperPath;
+  dconf.settings = {
+    "org/gnome/desktop/background" = {
+      picture-uri-dark = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
+    };
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
 
   gtk = {
     enable = true;
-    theme.name = "adwaita-dark";
     cursorTheme.name = "Bibata-Modern-Ice";
     iconTheme.name = "GruvboxPlus";
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome.gnome-themes-extra;
+    };
+  };
+
+  # Wayland, X, etc. support for session vars
+  systemd.user.sessionVariables = SessionVariables;
+
+  qt = {
+    enable = true;
+    platformTheme.name = "adwaita";
+    style.name = "adwaita-dark";
   };
 
   ###
@@ -136,7 +161,8 @@ in
   xsession = {
     enable = true;
     initExtra = ''
-      xinput set-prop "Logitech G502 HERO Gaming Mouse" "Coordinate Transformation Matrix" 0.45 0 0 0 0.45 0 0 0 1
+      feh --bg-fill ~/.background-image
+      xinput set-prop "Logitech G502 HERO Gaming Mouse" "Coordinate Transformation Matrix" 0.5 0 0 0 0.5 0 0 0 1
     '';
   };
 
@@ -218,7 +244,7 @@ in
   };
   ### Rofi
   ##
-  home.file.".config/rofi/config.rasi".text = with config.colorScheme.colors; ''
+  home.file.".config/rofi/config.rasi".text = with config.colorScheme.palette; ''
     /*******************************************************************************
     * ROUNDED THEME FOR ROFI
     * User                 : LR-Tech
@@ -328,4 +354,15 @@ in
       text-color: inherit;
 }
   '';
+  ###
+  ## Redshift
+  home.file.".config/redshift/redshift.conf".text = ''
+    [redshift]
+    temp-day=6500
+    temp-night=3000
+    transition=1
+
+    [randr]
+    screen=0
+'';
 }
