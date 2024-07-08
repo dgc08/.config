@@ -42,6 +42,7 @@ in
 
     rofi
 
+    unzip
     ffmpeg
     yt-dlp
 
@@ -49,6 +50,7 @@ in
     pavucontrol
     playerctl
     vlc
+    fontfinder
 
     ## utils
 
@@ -56,8 +58,8 @@ in
     file
     killall
 
-    #gcc
-    #gnumake
+    gcc
+    gnumake
     ## more stuff here
 
     ## required packages
@@ -92,6 +94,7 @@ in
   ## Alacritty
   programs.alacritty.enable = true;
   programs.alacritty.settings = {
+    font.size = 12.5;
     colors = with config.colorScheme.palette; {
       bright = {
         black = "0x${base00}";
@@ -163,6 +166,7 @@ in
     initExtra = ''
       feh --bg-fill ~/.background-image
       xinput set-prop "Logitech G502 HERO Gaming Mouse" "Coordinate Transformation Matrix" 0.5 0 0 0 0.5 0 0 0 1
+      xrandr --dpi 100
     '';
   };
 
@@ -358,11 +362,14 @@ in
   ## Redshift
   home.file.".config/redshift/redshift.conf".text = ''
     [redshift]
-    temp-day=6500
-    temp-night=3000
-    transition=1
+    temp-night=3300
+    gamma=0.8
+    fade=1
+    location-provider=manual
+    adjustment-method=randr
 
-    [randr]
-    screen=0
+    [manual]
+    lat=52.5200
+    lon=13.4050
 '';
 }

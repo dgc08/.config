@@ -58,7 +58,15 @@
 
   services.xserver = {
     enable = true;
-    displayManager.lightdm.enable = true;
+    displayManager.lightdm = {
+      enable = true;
+      autoLogin = {
+        enable = true;
+        user = "dgc";
+        timeout = 0;
+      };
+      background = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
+    };
     windowManager.qtile.enable = true;
 
     layout = "de";
@@ -135,8 +143,7 @@
     emacs
     #vim # imagine (im just joking)
 
-    pkgs.home-manager
-
+    home-manager
     # Rest should be managed by home-manager
   ];
 
@@ -158,7 +165,7 @@
   services.emacs = {
     enable = true;
   };
-  fonts.packages = with pkgs; [ noto-fonts-cjk-sans ubuntu_font_family ];
+  fonts.packages = with pkgs; [ whatsapp-emoji-font noto-fonts-cjk-sans ubuntu_font_family];
   fonts.fontconfig = {
       enable = true;
       defaultFonts = {

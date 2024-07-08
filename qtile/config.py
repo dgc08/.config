@@ -137,8 +137,10 @@ for i in groups:
 
 @hook.subscribe.startup_once
 def autostart():
-    import subprocess
-    subprocess.call([os.path.expanduser('~/.config/qtile/autostart.sh')])
+    from subprocess import Popen
+    from os.path import expanduser
+
+    Popen([expanduser('~/.config/qtile/autostart.sh')])
 
 layouts = [
     layout.Tile(border_on_single=False, border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
