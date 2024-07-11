@@ -4,7 +4,8 @@ let
   ###
   ## Aliases
   aliases = {
-    la = "ls -la";
+    la = "ls -ahl -v --group-directories-first";
+    l = "ls -ahl -v --group-directories-first";
     sys-update = "sudo nixos-rebuild switch";
     update = "home-manager switch";
     ed = "emacsclient -r -a 'emacs'";
@@ -28,6 +29,7 @@ in
 
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
+  nixpkgs.config.allowUnfree = true;
 
   colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
 
@@ -37,9 +39,18 @@ in
     brave
     vesktop
     whatsapp-for-linux
+    prismlauncher # multimc but cooler
+    anki
+    veracrypt
+    sqlitebrowser
+
+    libreoffice-qt
+    hunspell
+    hunspellDicts.de_DE
+    hunspellDicts.en_US
+
     redshift
     flameshot
-
     rofi
 
     unzip
@@ -57,14 +68,21 @@ in
     binutils
     file
     killall
+    ripgrep
 
-    gcc
-    gnumake
+    # gcc
+    # gnumake
+    # these should be there system wide ngl
     ## more stuff here
 
     ## required packages
     dconf
     feh
+
+    xclip
+    xdotool
+    xorg.xprop
+    xorg.xwininfo
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -94,7 +112,7 @@ in
   ## Alacritty
   programs.alacritty.enable = true;
   programs.alacritty.settings = {
-    font.size = 12.5;
+    font.size = 13.5;
     colors = with config.colorScheme.palette; {
       bright = {
         black = "0x${base00}";
@@ -165,9 +183,9 @@ in
     enable = true;
     initExtra = ''
       feh --bg-fill ~/.background-image
-      xinput set-prop "Logitech G502 HERO Gaming Mouse" "Coordinate Transformation Matrix" 0.5 0 0 0 0.5 0 0 0 1
       xrandr --dpi 100
     '';
+      #xinput set-prop "Logitech G502 HERO Gaming Mouse" "Coordinate Transformation Matrix" 0.5 0 0 0 0.5 0 0 0 1
   };
 
   ###

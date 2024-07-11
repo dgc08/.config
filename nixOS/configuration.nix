@@ -129,9 +129,20 @@
   services.flatpak.enable = true;
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
-    # Add any missing dynamic libraries for unpackaged programs
-    # here, NOT in environment.systemPackages
-  ];
+    # openssl
+    # xorg.libX11
+    # xorg.libXcursor
+    # xorg.libxcb
+    # xorg.libXi
+    # xorg.libXext
+    # xorg.libXrandr
+    # libxkbcommon
+    # libz
+    # libGL
+    # vulkan-loader
+
+    # fontconfig
+];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -142,6 +153,9 @@
     git
     emacs
     #vim # imagine (im just joking)
+
+    gcc
+    gnumake
 
     home-manager
     # Rest should be managed by home-manager
@@ -165,14 +179,22 @@
   services.emacs = {
     enable = true;
   };
-  fonts.packages = with pkgs; [ whatsapp-emoji-font noto-fonts-cjk-sans ubuntu_font_family];
+  fonts.packages = with pkgs; [
+    # bront_fonts
+    whatsapp-emoji-font
+    ubuntu_font_family
+    noto-fonts-cjk-sans
+    noto-fonts
+  ];
   fonts.fontconfig = {
       enable = true;
       defaultFonts = {
         sansSerif = ["Ubuntu Bold"];
         serif = ["Ubuntu Bold"];
-        monospace = ["Ubuntu Mono Bold"];
+        monospace = ["Ubuntu Mono"];
       };
+
+      
       hinting.enable = true;
       antialias = true;
   };

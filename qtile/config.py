@@ -88,11 +88,21 @@ keys = [
 
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 
+
+    # Keyboard shortcuts for media
     Key([mod], "y", lazy.spawn("playerctl previous"), desc="Previous media"),
     Key([mod, "control"], "y", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -1%"), desc="Dec volume"),
     Key([mod], "x", lazy.spawn("playerctl play-pause"), desc="Play/Pause"),
     Key([mod], "c", lazy.spawn("playerctl next"), desc="Next media"),
     Key([mod, "control"], "c", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +1%"), desc="Inc volume"),
+
+    # Media keys
+    Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous media"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -1%"), desc="Dec volume"),
+    Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Play/Pause"),
+    Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next media"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +1%"), desc="Inc volume"),
+
 ]
 
     # Add key bindings to switch VTs in Wayland.
