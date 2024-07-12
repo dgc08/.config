@@ -43,6 +43,8 @@ in
     anki
     veracrypt
     sqlitebrowser
+    gimp
+    mypaint
 
     libreoffice-qt
     hunspell
@@ -69,6 +71,8 @@ in
     file
     killall
     ripgrep
+    fd
+    cmigemo
 
     # gcc
     # gnumake
@@ -76,6 +80,7 @@ in
     ## more stuff here
 
     ## required packages
+    gtk3
     dconf
     feh
 
@@ -112,7 +117,7 @@ in
   ## Alacritty
   programs.alacritty.enable = true;
   programs.alacritty.settings = {
-    font.size = 13.5;
+    font.size = 14.5;
     colors = with config.colorScheme.palette; {
       bright = {
         black = "0x${base00}";
@@ -166,6 +171,8 @@ in
       name = "Adwaita-dark";
       package = pkgs.gnome.gnome-themes-extra;
     };
+    font.name = "Ubuntu";
+    font.size = 12;
   };
 
   # Wayland, X, etc. support for session vars
@@ -173,7 +180,7 @@ in
 
   qt = {
     enable = true;
-    platformTheme.name = "adwaita";
+    platformTheme.name = "gtk3";
     style.name = "adwaita-dark";
   };
 
@@ -387,7 +394,7 @@ in
     adjustment-method=randr
 
     [manual]
-    lat=52.5200
-    lon=13.4050
+    lat=55.7558
+    lon=37.6173
 '';
 }

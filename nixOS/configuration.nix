@@ -181,6 +181,7 @@
   };
   fonts.packages = with pkgs; [
     # bront_fonts
+    nerdfonts
     whatsapp-emoji-font
     ubuntu_font_family
     noto-fonts-cjk-sans

@@ -6,6 +6,8 @@
 # Copyright (c) 2013 horsik
 # Copyright (c) 2013 Tao Sauvage
 #
+# Copyright (c) 2024 Sinthoras39 (This is my config; I modified the qtile default config)
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -33,6 +35,7 @@ from libqtile import hook
 
 mod = "mod4"
 terminal = "alacritty"
+#terminal = "emacsclient -ce \"(my/open-terminal)\"" # Emacs is my fav OS (pls don't actually use this)
 
 keys = [
     # A list of available commands that can be bound to keys can be found
