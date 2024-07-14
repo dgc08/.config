@@ -55,6 +55,7 @@ in
     flameshot
     rofi
 
+    python312Packages.ipython
     unzip
     ffmpeg
     yt-dlp
