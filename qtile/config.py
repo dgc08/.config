@@ -65,7 +65,7 @@ keys = [
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.normalize()),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "BackSpace", lazy.spawn('rofi -show combi -combi-modi "window,drun,run,filebrowser"'), desc="Rofi application launcher"),
+    Key([mod], "BackSpace", lazy.spawn('rofi -show combi -combi-modi "window,drun,run"'), desc="Rofi application launcher"),
     Key([], "Print", lazy.spawn('flameshot gui'), desc="take screenshot"),
 
     # Toggle between different layouts as defined below

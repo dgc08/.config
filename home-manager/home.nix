@@ -68,12 +68,15 @@ in
 
     ## utils
 
-    binutils
+    moreutils
     file
     killall
     ripgrep
     fd
     cmigemo
+    llvmPackages_12.clang-tools
+    gdb
+    #binutils
 
     # gcc
     # gnumake
