@@ -11,8 +11,10 @@ let
     ed = "emacsclient -r -a 'emacs'";
     qed = "emacsclient -nw -a 'emacs -nw'";
     sued = "sudoedit";
-    clean = "(yes | rm /tmp/* -r) & nix-collect-garbage";
+    clean = "(yes | rm /tmp/* -r) & nix-collect-garbage && sudo nix-collect-garbage -d";
     run = "nix-shell -p";
+    shl = "nix-shell . --command \"zsh\"";
+    shell = "nix-shell . --command \"zsh\"";
   };
   ###
   ## Session Vars
@@ -73,7 +75,6 @@ in
     killall
     ripgrep
     fd
-    cmigemo
     llvmPackages_12.clang-tools
     gdb
     #binutils

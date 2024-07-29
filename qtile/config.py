@@ -73,7 +73,7 @@ keys = [
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
 
     Key([mod], "q", lazy.spawn("emacsclient -c"), desc="Texteditor"),
-    Key([mod], "e", lazy.spawn("emacsclient --eval \"(emacs-everywhere)\""), desc="Emacs everywhere"),
+    Key([mod], "e", lazy.spawn("emacsclient --eval \"(emacs-everywhere)\" --frame-parameters '((name . \"Emacs Everywhere\"))'")),
 
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
     Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
@@ -141,6 +141,12 @@ for i in groups:
                  desc="move focused window to group {}".format(i.name)),
         ]
     )
+
+@hook.subscribe.client_new
+def set_floating(window):
+    if window.window.get_name() == "Emacs Everywhere":
+        window.floating = True
+        window.tweak_floating(x=100, y=100, width=800, height=600)
 
 @hook.subscribe.startup_once
 def autostart():
@@ -215,6 +221,7 @@ floating_layout = layout.Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
+        Match(title="Emacs Everywhere"),
         Match(wm_class="confirmreset"),  # gitk
         Match(wm_class="makebranch"),  # gitk
         Match(wm_class="maketag"),  # gitk
