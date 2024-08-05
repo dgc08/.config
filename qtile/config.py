@@ -33,6 +33,9 @@ from libqtile.utils import guess_terminal
 
 from libqtile import hook
 
+from os.path import expanduser
+from os import system
+
 mod = "mod4"
 terminal = "alacritty"
 #terminal = "emacsclient -ce \"(my/open-terminal)\"" # Emacs is my fav OS (pls don't actually use this)
@@ -65,7 +68,7 @@ keys = [
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.normalize()),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "BackSpace", lazy.spawn('rofi -show combi -combi-modi "window,drun,run"'), desc="Rofi application launcher"),
+    Key([mod], "BackSpace", lazy.spawn(expanduser('~/.config/qtile/rofi.sh')), desc="Rofi application launcher"),
     Key([], "Print", lazy.spawn('flameshot gui'), desc="take screenshot"),
 
     # Toggle between different layouts as defined below
@@ -151,9 +154,9 @@ def set_floating(window):
 @hook.subscribe.startup_once
 def autostart():
     from subprocess import Popen
-    from os.path import expanduser
 
     Popen([expanduser('~/.config/qtile/autostart.sh')])
+    system(expanduser("~/.nix-profile/bin/nitrogen --set-zoom ~/.config/qtile/wallpapers/wallpaper.png"))
 
 layouts = [
     layout.Bsp(fair = False, grow_amount = 5), # I love bsp

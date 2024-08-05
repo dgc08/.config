@@ -8,13 +8,15 @@ let
     l = "ls -ahl -v --group-directories-first";
     sys-update = "sudo nixos-rebuild switch";
     update = "home-manager switch";
-    ed = "emacsclient -r -a 'emacs'";
+    ed = "emacsclient -a 'emacs'";
     qed = "emacsclient -nw -a 'emacs -nw'";
     sued = "sudoedit";
-    clean = "(yes | rm /tmp/* -r) & nix-collect-garbage && sudo nix-collect-garbage -d";
+    clean = "(yes | rm /tmp/* -r) & nix-collect-garbage";
     run = "nix-shell -p";
     shl = "nix-shell . --command \"zsh\"";
-    shell = "nix-shell . --command \"zsh\"";
+    shell = "nix-shell . --command \"zsh\" || nix develop";
+    poweroff = "sudo poweroff";
+    reboot = "sudo reboot";
   };
   ###
   ## Session Vars
@@ -41,8 +43,6 @@ in
     brave
     vesktop
     whatsapp-for-linux
-    prismlauncher # multimc but cooler
-    anki
     veracrypt
     sqlitebrowser
     gimp
@@ -53,30 +53,21 @@ in
     hunspellDicts.de_DE
     hunspellDicts.en_US
 
-    redshift
-    flameshot
-    rofi
-
-    python312Packages.ipython
-    unzip
     ffmpeg
     yt-dlp
 
-    networkmanagerapplet
-    pavucontrol
-    playerctl
     vlc
     fontfinder
 
     ## utils
 
     moreutils
-    file
+    #file
     killall
     ripgrep
     fd
-    llvmPackages_12.clang-tools
-    gdb
+    protonup
+    llvmPackages_12.clang-tools#
     #binutils
 
     # gcc
@@ -87,19 +78,8 @@ in
     ## required packages
     gtk3
     dconf
-    feh
-
-    xclip
-    xdotool
-    xorg.xprop
-    xorg.xwininfo
+    nitrogen
   ];
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    
-  };
 
   home.sessionVariables = SessionVariables;
 
@@ -120,49 +100,42 @@ in
   };
   ###
   ## Alacritty
-  programs.alacritty.enable = true;
-  programs.alacritty.settings = {
-    font.size = 14.5;
-    colors = with config.colorScheme.palette; {
-      bright = {
-        black = "0x${base00}";
-        blue = "0x${base0D}";
-        cyan = "0x${base0C}";
-        green = "0x${base0B}";
-        magenta = "0x${base0E}";
-        red = "0x${base08}";
-        white = "0x${base06}";
-        yellow = "0x${base09}";
-      };
-      cursor = {
-        cursor = "0x${base06}";
-        text = "0x${base06}";
-      };
-      normal = {
-        black = "0x${base00}";
-        blue = "0x${base0D}";
-        cyan = "0x${base0C}";
-        green = "0x${base0B}";
-        magenta = "0x${base0E}";
-        red = "0x${base08}";
-        white = "0x${base06}";
-        yellow = "0x${base0A}";
-      };
-      primary = {
-        background = "0x${base00}";
-        foreground = "0x${base06}";
-      };
-    };
-  };
+  home.file.".config/alacritty/alacritty.yml".text = with config.colorScheme.palette; ''
+    font:
+      size: 14.5
+    colors:
+      bright:
+        black: "0x${base00}"
+        blue: "0x${base0D}"
+        cyan: "0x${base0C}"
+        green: "0x${base0B}"
+        magenta: "0x${base0E}"
+        red: "0x${base08}"
+        white: "0x${base06}"
+        yellow: "0x${base09}"
+      cursor:
+        cursor: "0x${base06}"
+        text: "0x${base06}"
+      normal:
+        black: "0x${base00}"
+        blue: "0x${base0D}"
+        cyan: "0x${base0C}"
+        green: "0x${base0B}"
+        magenta: "0x${base0E}"
+        red: "0x${base08}"
+        white: "0x${base06}"
+        yellow: "0x${base0A}"
+      primary:
+        background: "0x${base00}"
+        foreground: "0x${base06}"
+    window:
+      opacity: 0.95
+  '';
 
   ###
   ## Themes
   #services.xserver.desktopManager.wallpaper.type = "fill";
-  home.file.".background-image".source = wallpaperPath;
   dconf.settings = {
-    "org/gnome/desktop/background" = {
-      picture-uri-dark = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
-    };
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
     };
@@ -184,8 +157,7 @@ in
   systemd.user.sessionVariables = SessionVariables;
 
   qt = {
-    enable = true;
-    platformTheme.name = "gtk3";
+    platformTheme.name = "gtk2";
     style.name = "adwaita-dark";
   };
 
@@ -194,8 +166,7 @@ in
   xsession = {
     enable = true;
     initExtra = ''
-      feh --bg-fill ~/.background-image
-      xrandr --dpi 100
+      ~/.config/qtile/autostart.sh
     '';
       #xinput set-prop "Logitech G502 HERO Gaming Mouse" "Coordinate Transformation Matrix" 0.5 0 0 0 0.5 0 0 0 1
   };
@@ -267,6 +238,19 @@ in
         file = "autopair.zsh";
       }
     ];
+    initExtra = ''
+    source /etc/profile
+    source $HOME/.profile
+    function enter_nix_shell() {
+  if [ -f default.nix ]; then
+    echo "Entering nix-shell for $(pwd)"
+    nix-shell . --command \"zsh\"
+  fi
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook chpwd enter_nix_shell
+'';
   };
 
   ###
@@ -390,16 +374,16 @@ in
   '';
   ###
   ## Redshift
-  home.file.".config/redshift/redshift.conf".text = ''
-    [redshift]
-    temp-night=3300
-    gamma=0.8
-    fade=1
-    location-provider=manual
-    adjustment-method=randr
+#   home.file.".config/redshift.conf".text = ''
+#     [redshift]
+#     temp-night=3300
+#     gamma=0.8
+#     fade=1
+#     location-provider=manual
+#     adjustment-method=randr
 
-    [manual]
-    lat=55.7558
-    lon=37.6173
-'';
+#     [manual]
+#     lat=55.7558
+#     lon=37.6173
+# '';
 }

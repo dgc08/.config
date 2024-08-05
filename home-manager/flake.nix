@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of dgc";
+  description = "Home Manager configuration / Common flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
