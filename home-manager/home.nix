@@ -259,6 +259,8 @@ add-zsh-hook chpwd enter_nix_shell
     enable = true;
     userName = "Sinthoras39";
     userEmail = "digc0820@gmail.com";
+    signing.key = "69E4AF976838CFE7";
+    signing.gpgPath = "/usr/bin/gpg";
   };
   ### Rofi
   ##
