@@ -1,0 +1,13 @@
+[commit]
+	gpgSign = false
+
+[gpg]
+	program = "/usr/bin/gpg"
+
+[tag]
+	gpgSign = false
+
+[user]
+	email = "digc0820@gmail.com"
+	name = "Sinthoras39"
+	signingKey = "69E4AF976838CFE7"

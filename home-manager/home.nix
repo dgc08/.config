@@ -42,6 +42,8 @@ in
   home.packages = with pkgs; [
     brave
     vesktop
+    thunderbird
+    kwalletmanager
     whatsapp-for-linux
     veracrypt
     sqlitebrowser
@@ -256,7 +258,7 @@ add-zsh-hook chpwd enter_nix_shell
   ###
   ## Git
   programs.git = {
-    enable = true;
+    # enable = true;
     userName = "Sinthoras39";
     userEmail = "digc0820@gmail.com";
     signing.key = "69E4AF976838CFE7";
