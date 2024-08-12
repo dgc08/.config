@@ -34,6 +34,7 @@ in
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
   nixpkgs.config.allowUnfree = true;
+  targets.genericLinux.enable = true;
 
   colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
 
@@ -43,7 +44,6 @@ in
     brave
     vesktop
     thunderbird
-    kwalletmanager
     whatsapp-for-linux
     veracrypt
     sqlitebrowser
@@ -90,17 +90,6 @@ in
 
   #####
   ###
-  ## MIME
-  xdg.mimeApps = {
-    enable = true;
-    associations.added = {
-      "inode/directory" = ["emacsclient.desktop" "emacs.desktop"];
-    };
-    defaultApplications = {
-      "inode/directory" = ["emacsclient.desktop"];
-    };
-  };
-  ###
   ## Alacritty
   home.file.".config/alacritty/alacritty.yml".text = with config.colorScheme.palette; ''
     font:
@@ -142,27 +131,8 @@ in
       color-scheme = "prefer-dark";
     };
   };
-
-  gtk = {
-    enable = true;
-    cursorTheme.name = "Bibata-Modern-Ice";
-    iconTheme.name = "GruvboxPlus";
-    theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
-    };
-    font.name = "Ubuntu";
-    font.size = 12;
-  };
-
   # Wayland, X, etc. support for session vars
   systemd.user.sessionVariables = SessionVariables;
-
-  qt = {
-    platformTheme.name = "gtk2";
-    style.name = "adwaita-dark";
-  };
-
   ###
   ## xsession
   xsession = {

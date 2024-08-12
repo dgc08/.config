@@ -1,0 +1,8 @@
+[Added Associations]
+inode/directory=emacsclient.desktop;emacs.desktop
+
+[Default Applications]
+inode/directory=emacsclient.desktop
+text/html=brave-browser.desktop
+
+[Removed Associations]
