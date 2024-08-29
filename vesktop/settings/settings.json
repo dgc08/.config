@@ -91,7 +91,7 @@
             "enabled": false
         },
         "BlurNSFW": {
-            "enabled": false
+            "enabled": true
         },
         "CallTimer": {
             "enabled": true,
@@ -224,7 +224,8 @@
             "enabled": false
         },
         "NoBlockedMessages": {
-            "enabled": true
+            "enabled": true,
+            "ignoreBlockedMessages": false
         },
         "NoDevtoolsWarning": {
             "enabled": false
@@ -389,7 +390,8 @@
         },
         "Translate": {
             "enabled": true,
-            "autoTranslate": false
+            "autoTranslate": false,
+            "showChatBarButton": true
         },
         "TypingIndicator": {
             "enabled": false
@@ -460,7 +462,8 @@
         },
         "Dearrow": {
             "enabled": true,
-            "hideButton": false
+            "hideButton": false,
+            "replaceElements": 0
         },
         "PictureInPicture": {
             "enabled": false
@@ -607,7 +610,8 @@
             "enabled": false
         },
         "Summaries": {
-            "enabled": true
+            "enabled": true,
+            "summaryExpiryThresholdDays": 3
         },
         "ShowTimeoutDuration": {
             "enabled": false
@@ -619,9 +623,6 @@
             "enabled": true
         },
         "WebRichPresence (arRPC)": {
-            "enabled": false
-        },
-        "ShowAllRoles": {
             "enabled": false
         },
         "WebKeybinds": {
@@ -636,6 +637,15 @@
         },
         "YoutubeAdblock": {
             "enabled": true
+        },
+        "ConsoleJanitor": {
+            "enabled": false
+        },
+        "MentionAvatars": {
+            "enabled": false
+        },
+        "AlwaysExpandRoles": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -648,6 +658,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1722591778046
+        "settingsSyncVersion": 1724936377847
     }
 }

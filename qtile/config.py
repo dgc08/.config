@@ -44,23 +44,23 @@ keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
-    Key([mod], "Left", lazy.layout.left(), desc="Move focus to Left"),
-    Key([mod], "Right", lazy.layout.right(), desc="Move focus to Right"),
-    Key([mod], "Down", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "Up", lazy.layout.up(), desc="Move focus up"),
+    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
+    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
+    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
+    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
-    # Move windows between Left/Right columns or move up/down in current stack.
+    # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "Left", lazy.layout.shuffle_left(), desc="Move window to the Left"),
-    Key([mod, "shift"], "Right", lazy.layout.shuffle_right(), desc="Move window to the Right"),
-    Key([mod, "shift"], "Down", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key([mod, "shift"], "Up", lazy.layout.shuffle_up(), desc="Move window up"),
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
-    Key([mod, "control"], "Left", lazy.layout.grow_left(), desc="Grow window to the Left"),
-    Key([mod, "control"], "Right", lazy.layout.grow_right(), desc="Grow window to the Right"),
-    Key([mod, "control"], "Down", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "Up", lazy.layout.grow_up(), desc="Grow window up"),
+    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
+    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
+    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
@@ -75,6 +75,9 @@ keys = [
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
 
+    Key([mod], "z", lazy.spawn("setxkbmap -option")),
+    Key([mod, "control"], "z", lazy.spawn("setxkbmap -option caps:swapescape")),
+
     Key([mod], "q", lazy.spawn("emacsclient -c"), desc="Texteditor"),
     Key([mod], "e", lazy.spawn("emacsclient --eval \"(emacs-everywhere)\" --frame-parameters '((name . \"Emacs Everywhere\"))'")),
 
@@ -83,8 +86,8 @@ keys = [
 
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
 
-    Key([mod], "l", lazy.spawn("dm-tool lock"), desc="Lock screen"),
-    Key([mod, "control"], "l", lazy.shutdown(), desc="Log out/Shutdown Qtile"),
+    Key([mod], "p", lazy.spawn("i3lock --color #FF6F00"), desc="Lock screen"),
+    Key([mod, "control"], "p", lazy.shutdown(), desc="Log out/Shutdown Qtile"),
 
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 
@@ -119,7 +122,7 @@ for vt in range(1, 8):
     )
 
 
-groups = [Group(i) for i in "123asdhjk"]
+groups = [Group(i) for i in "123asduio"]
 
 for i in groups:
     keys.extend(

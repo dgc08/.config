@@ -1,8 +1,13 @@
 #!/usr/bin/env sh
 source /etc/profile
 
+export XDG_CURRENT_DESKTOP=KDE
+export XDG_SESSION_DESKTOP=KDE
+export SAL_USE_VCLPLUGIN=kde5
+
 cd $HOME
 
+nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
 xrandr --dpi 110
 setxkbmap -option caps:swapescape
 
@@ -10,7 +15,7 @@ emacs --daemon &
 playerctld daemon &
 picom &
 
-/usr/bin/qtile/env/bin/qtile run-cmd -g 1 $HOME/.nix-profile/bin/brave &
+/usr/bin/qtile/env/bin/qtile run-cmd -g 1 brave-browser
 redshift-gtk -c .config/redshift.conf &
 
 nitrogen --random --set-zoom $HOME/.config/qtile/wallpapers/

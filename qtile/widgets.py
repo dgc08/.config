@@ -48,7 +48,7 @@ widgets = [
         padding=0,
         mouse_callbacks={'Button1': lazy.spawn("pavucontrol")},
     ),
-    widget.Volume(
+    widget.PulseVolume(
         padding=5,
         mouse_callbacks={'Button1': lazy.spawn("pavucontrol")},
     ),

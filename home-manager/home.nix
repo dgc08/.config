@@ -17,6 +17,7 @@ let
     shell = "nix-shell . --command \"zsh\" || nix develop";
     poweroff = "sudo poweroff";
     reboot = "sudo reboot";
+    ytmp3 = ''yt-dlp -f bestaudio --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s"'';
   };
   ###
   ## Session Vars
@@ -41,7 +42,6 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    brave
     vesktop
     thunderbird
     whatsapp-for-linux
@@ -68,8 +68,7 @@ in
     killall
     ripgrep
     fd
-    protonup
-    llvmPackages_12.clang-tools#
+    llvmPackages_12.clang-tools
     #binutils
 
     # gcc
@@ -213,6 +212,14 @@ in
     initExtra = ''
     source /etc/profile
     source $HOME/.profile
+
+    # Define key bindings
+    bindkey '^o' accept-line
+    bindkey '^j' down-line-or-history
+    bindkey '^k' up-line-or-history
+    bindkey '^p' kill-line
+
+
     function enter_nix_shell() {
   if [ -f default.nix ]; then
     echo "Entering nix-shell for $(pwd)"
