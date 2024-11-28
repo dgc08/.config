@@ -1,14 +1,17 @@
+
 { config, pkgs, inputs, ... }:
 let
   wallpaperPath = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
   ###
   ## Aliases
   aliases = {
+    a = "tmux a || tmux";
     la = "ls -ahl -v --group-directories-first";
     l = "ls -ahl -v --group-directories-first";
-    sys-update = "sudo nixos-rebuild switch";
+    sys-update = "sudo apt update && sudo apt upgrade && sudo apt autoremove";
     update = "home-manager switch";
     ed = "emacsclient -a 'emacs'";
+    med = "emacs -q -l ~/.config/minemacs.el";
     qed = "emacsclient -nw -a 'emacs -nw'";
     sued = "sudoedit";
     clean = "(yes | rm /tmp/* -r) & nix-collect-garbage";
@@ -22,7 +25,7 @@ let
   ###
   ## Session Vars
   SessionVariables = {
-    EDITOR = "emacsclient -r -a 'emacs'";
+    EDITOR = "emacsclient -a 'emacs'";
   };
 in
 {
@@ -66,7 +69,6 @@ in
     moreutils
     #file
     killall
-    ripgrep
     fd
     llvmPackages_12.clang-tools
     #binutils

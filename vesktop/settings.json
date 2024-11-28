@@ -1,4 +1,7 @@
 {
     "splashColor": "rgba(255, 255, 255, 0.6)",
-    "splashBackground": "rgb(22, 25, 33)"
+    "splashBackground": "rgb(22, 25, 33)",
+    "audio": {
+        "workaround": false
+    }
 }

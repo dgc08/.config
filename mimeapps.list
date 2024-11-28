@@ -1,8 +1,9 @@
 [Added Associations]
+application/pdf=brave-browser.desktop;
 inode/directory=emacsclient.desktop;emacs.desktop
 
 [Default Applications]
+application/pdf=brave-browser.desktop;
 inode/directory=emacsclient.desktop
 text/html=brave-browser.desktop
-
-[Removed Associations]
+x-scheme-handler/ror2mm=r2modman.desktop

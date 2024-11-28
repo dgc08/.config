@@ -91,7 +91,8 @@
             "enabled": false
         },
         "BlurNSFW": {
-            "enabled": true
+            "enabled": true,
+            "blurAmount": 10
         },
         "CallTimer": {
             "enabled": true,
@@ -281,9 +282,6 @@
         "PlatformIndicators": {
             "enabled": false
         },
-        "PronounDB": {
-            "enabled": false
-        },
         "QuickMention": {
             "enabled": false
         },
@@ -331,9 +329,6 @@
         "RoleColorEverywhere": {
             "enabled": false
         },
-        "SearchReply": {
-            "enabled": false
-        },
         "SendTimestamps": {
             "enabled": true,
             "replaceMessageContents": true
@@ -368,10 +363,10 @@
             "enabled": false
         },
         "SpotifyControls": {
-            "enabled": false
+            "enabled": true
         },
         "SpotifyCrack": {
-            "enabled": false
+            "enabled": true
         },
         "SpotifyShareCommands": {
             "enabled": false
@@ -646,6 +641,30 @@
         },
         "AlwaysExpandRoles": {
             "enabled": false
+        },
+        "FullSearchContext": {
+            "enabled": false
+        },
+        "UserMessagesPronouns": {
+            "enabled": false
+        },
+        "DynamicImageModalAPI": {
+            "enabled": true
+        },
+        "AccountPanelServerProfile": {
+            "enabled": false
+        },
+        "CopyFileContents": {
+            "enabled": false
+        },
+        "FixImagesQuality": {
+            "enabled": false
+        },
+        "NoMaskedUrlPaste": {
+            "enabled": false
+        },
+        "StickerPaste": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -658,6 +677,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1724936377847
+        "settingsSyncVersion": 1731102670514
     }
 }
