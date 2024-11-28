@@ -79,7 +79,6 @@ in
     ## more stuff here
 
     ## required packages
-    gtk3
     dconf
     nitrogen
   ];
@@ -90,40 +89,6 @@ in
   programs.home-manager.enable = true;
 
   #####
-  ###
-  ## Alacritty
-  home.file.".config/alacritty/alacritty.yml".text = with config.colorScheme.palette; ''
-    font:
-      size: 14.5
-    colors:
-      bright:
-        black: "0x${base00}"
-        blue: "0x${base0D}"
-        cyan: "0x${base0C}"
-        green: "0x${base0B}"
-        magenta: "0x${base0E}"
-        red: "0x${base08}"
-        white: "0x${base06}"
-        yellow: "0x${base09}"
-      cursor:
-        cursor: "0x${base06}"
-        text: "0x${base06}"
-      normal:
-        black: "0x${base00}"
-        blue: "0x${base0D}"
-        cyan: "0x${base0C}"
-        green: "0x${base0B}"
-        magenta: "0x${base0E}"
-        red: "0x${base08}"
-        white: "0x${base06}"
-        yellow: "0x${base0A}"
-      primary:
-        background: "0x${base00}"
-        foreground: "0x${base06}"
-    window:
-      opacity: 0.95
-  '';
-
   ###
   ## Themes
   #services.xserver.desktopManager.wallpaper.type = "fill";
@@ -243,130 +208,4 @@ add-zsh-hook chpwd enter_nix_shell
     signing.key = "69E4AF976838CFE7";
     signing.gpgPath = "/usr/bin/gpg";
   };
-  ### Rofi
-  ##
-  home.file.".config/rofi/config.rasi".text = with config.colorScheme.palette; ''
-    /*******************************************************************************
-    * ROUNDED THEME FOR ROFI
-    * User                 : LR-Tech
-    * Theme Repo           : https://github.com/lr-tech/rofi-themes-collection
-    *******************************************************************************/
-    * {
-      bg0:    #${base00}F2;
-      bg1:    #2A2A2A;
-      bg2:    #3D3D3D80;
-      bg3:    #F57C00F2;
-      fg0:    #E6E6E6;
-      fg1:    #${base06};
-      fg2:    #969696;
-      fg3:    #3D3D3D;
-    }
-
-    * {
-      font:   "Roboto 12";
-
-      background-color:   transparent;
-      text-color:         @fg0;
-
-      margin:     0px;
-      padding:    0px;
-      spacing:    0px;
-  }
-
-  window {
-      location:       center;
-      width:          480;
-      border-radius:  24px;
-
-      background-color:   @bg0;
-  }
-
-  mainbox {
-      padding:    12px;
-  }
-
-  inputbar {
-      background-color:   @bg1;
-      border-color:       @bg3;
-
-      border:         2px;
-      border-radius:  16px;
-
-      padding:    8px 16px;
-      spacing:    8px;
-      children:   [ prompt, entry ];
-  }
-
-  prompt {
-      text-color: @fg2;
-  }
-
-  entry {
-      placeholder:        "Search";
-      placeholder-color:  @fg3;
-      text-color: @fg1;
-  }
-
-  message {
-      margin:             12px 0 0;
-      border-radius:      16px;
-      border-color:       @bg2;
-      background-color:   @bg2;
-  }
-
-  textbox {
-      padding:    8px 24px;
-  }
-
-  listview {
-      background-color:   transparent;
-
-      margin:     12px 0 0;
-      lines:      8;
-      columns:    1;
-
-      fixed-height: false;
-  }
-
-  element {
-      padding:        8px 16px;
-      spacing:        8px;
-      border-radius:  16px;
-  }
-
-  element normal active {
-      text-color: @bg3;
-  }
-
-  element alternate active {
-      text-color: @bg3;
-  }
-
-  element selected normal, element selected active {
-      background-color:   @bg3;
-  }
-
-  element-icon {
-      size:           1em;
-      vertical-align: 0.5;
-  }
-
-  element-text {
-      text-color: inherit;
-}
-  '';
-  ###
-  ## Redshift
-#   home.file.".config/redshift.conf".text = ''
-#     [redshift]
-#     temp-night=3300
-#     gamma=0.8
-#     fade=1
-#     location-provider=manual
-#     adjustment-method=randr
-
-#     [manual]
-#     lat=55.7558
-#     lon=37.6173
-# '';
 }
