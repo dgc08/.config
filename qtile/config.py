@@ -37,8 +37,8 @@ from os.path import expanduser
 from os import system
 
 mod = "mod4"
+office = [mod, "shift", "control", "mod1"] #stupid office key from microsoft keyboard
 terminal = "alacritty"
-#terminal = "emacsclient -ce \"(my/open-terminal)\"" # Emacs is my fav OS (pls don't actually use this)
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -70,6 +70,9 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "BackSpace", lazy.spawn(expanduser('~/.config/qtile/rofi.sh')), desc="Rofi application launcher"),
     Key([], "Print", lazy.spawn('flameshot gui'), desc="take screenshot"),
+    Key([*office], "space", lazy.spawn(expanduser('~/.config/qtile/layout.sh')), desc="Switch layouts"),
+    #Key([], "mod4", lazy.spawn('./layout.sh'), desc="Switch layouts"),
+    #
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
@@ -105,6 +108,9 @@ keys = [
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Play/Pause"),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next media"),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +1%"), desc="Inc volume"),
+    Key([], "XF86Tools", lazy.spawn("pavucontrol"), desc="Volume control"),
+
+    Key([], "XF86Calculator", lazy.spawn("speedcrunch"), desc="calcutor"),
 
 ]
 

@@ -4,7 +4,9 @@
     "autoUpdateNotification": true,
     "useQuickCss": true,
     "themeLinks": [],
-    "enabledThemes": [],
+    "enabledThemes": [
+        "crazy.css"
+    ],
     "enableReactDevtools": false,
     "frameless": false,
     "transparent": false,
@@ -363,10 +365,13 @@
             "enabled": false
         },
         "SpotifyControls": {
-            "enabled": true
+            "enabled": true,
+            "hoverControls": false
         },
         "SpotifyCrack": {
-            "enabled": true
+            "enabled": true,
+            "noSpotifyAutoPause": true,
+            "keepSpotifyActivityOnIdle": false
         },
         "SpotifyShareCommands": {
             "enabled": false
@@ -458,7 +463,8 @@
         "Dearrow": {
             "enabled": true,
             "hideButton": false,
-            "replaceElements": 0
+            "replaceElements": 0,
+            "dearrowByDefault": true
         },
         "PictureInPicture": {
             "enabled": false
@@ -677,6 +683,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1731102670514
+        "settingsSyncVersion": 1734378436720
     }
 }

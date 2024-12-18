@@ -9,10 +9,14 @@ cd $HOME
 
 nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
 xrandr --dpi 110
+
 setxkbmap -option caps:swapescape
+setxkbmap -layout "kakutr"
 
 emacs --daemon &
 playerctld daemon &
+
+dunst &
 picom &
 
 /usr/bin/qtile/env/bin/qtile run-cmd -g 1 brave-browser
