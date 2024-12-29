@@ -26,7 +26,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from libqtile import bar, layout, qtile, widget
+from libqtile import bar, layout, qtile, widget, qtile
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -35,6 +35,8 @@ from libqtile import hook
 
 from os.path import expanduser
 from os import system
+from datetime import datetime
+from time import sleep
 
 mod = "mod4"
 office = [mod, "shift", "control", "mod1"] #stupid office key from microsoft keyboard
@@ -165,7 +167,14 @@ def autostart():
     from subprocess import Popen
 
     Popen([expanduser('~/.config/qtile/autostart.sh')])
-    system(expanduser("~/.nix-profile/bin/nitrogen --set-zoom ~/.config/qtile/wallpapers/wallpaper.png"))
+    #system(expanduser("~/.nix-profile/bin/nitrogen --set-zoom ~/.config/qtile/wallpapers/wallpaper.png"))
+
+    if 6 <= datetime.now().hour < 11:
+        Popen(["notify-send", "System kann vor 11 Uhr nicht verwendet werden", "Es ist noch vor 11:00. Sie werden in Kürze abgemeldet."])
+        sleep(10)
+        qtile.shutdown()
+
+    Popen([expanduser('~/.config/qtile/autostart_post.sh')])
 
 layouts = [
     layout.Bsp(fair = False, grow_amount = 5), # I love bsp
