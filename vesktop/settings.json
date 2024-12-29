@@ -3,5 +3,9 @@
     "splashBackground": "rgb(22, 25, 33)",
     "audio": {
         "workaround": false
-    }
+    },
+    "spellCheckLanguages": [
+        "en-US",
+        "en"
+    ]
 }

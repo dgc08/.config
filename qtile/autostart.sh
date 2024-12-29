@@ -19,12 +19,8 @@ playerctld daemon &
 dunst &
 picom &
 
-/usr/bin/qtile/env/bin/qtile run-cmd -g 1 brave-browser
-redshift-gtk -c .config/redshift.conf &
-
-nitrogen --random --set-zoom $HOME/.config/qtile/wallpapers/
-
 pactl set-sink-volume @DEFAULT_SINK@ 25%
+nitrogen --random --set-zoom $HOME/.config/qtile/wallpapers/
 
 #echo " Ran QTile autostart, reached end successfully" >> .log
 #$(date +"%r %a %d %h %y)
