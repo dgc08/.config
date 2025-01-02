@@ -25,6 +25,12 @@ widgets = [
     widget.CurrentLayout(
         padding=5
     ),
+    widget.TextBox(" |  Layout: "),
+    widget.KeyboardLayout(
+        configured_keyboards=["kakutr", "engvi", "ru phonetic"],  # Add layouts you want to toggle
+        display_map={"kakutr": "kakutropos", "engvi": "multitropos", "ru phonetic": "russian"},  # Optional display customization
+        padding=5
+    ),
     widget.TextBox(" | "),
     widget.WindowName(),
     widget.Systray(),

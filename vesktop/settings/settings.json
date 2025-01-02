@@ -348,7 +348,9 @@
             "enabled": false
         },
         "ShowHiddenChannels": {
-            "enabled": false
+            "enabled": true,
+            "showMode": 0,
+            "hideUnreads": true
         },
         "ShowMeYourName": {
             "enabled": false
@@ -359,14 +361,16 @@
         "SilentTyping": {
             "enabled": true,
             "showIcon": false,
-            "isEnabled": true
+            "isEnabled": false,
+            "contextMenu": true
         },
         "SortFriendRequests": {
             "enabled": false
         },
         "SpotifyControls": {
             "enabled": true,
-            "hoverControls": false
+            "hoverControls": false,
+            "useSpotifyUris": false
         },
         "SpotifyCrack": {
             "enabled": true,
@@ -521,7 +525,10 @@
             "role": true
         },
         "ShowHiddenThings": {
-            "enabled": false
+            "enabled": true,
+            "showTimeouts": true,
+            "showInvitesPaused": true,
+            "showModView": true
         },
         "BetterRoleContext": {
             "enabled": false
@@ -683,6 +690,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1734378436720
+        "settingsSyncVersion": 1735672336547
     }
 }

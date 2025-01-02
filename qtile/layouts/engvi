@@ -3,7 +3,7 @@ xkb_symbols "basic" {
 
     include "de"
 
-    name[Group1]="Viossa (multikakutropos) for the German Layout";
+    name[Group1]="Multikakutropos based on German";
     key <AE11> {type[Group1]="FOUR_LEVEL_PLUS_LOCK",  symbols[Group1]=
                   [dead_abovedot, question, backslash, questiondown, 0x1001E9E ]};
     key <AE12>	{ [dead_grave, dead_acute, dead_cedilla,  dead_ogonek ]	};
@@ -12,5 +12,6 @@ xkb_symbols "basic" {
     key <AC10>	{ [dead_diaeresis, dead_abovedot,  dead_belowdot, ssharp] };            //ö
     key <AC11>	{ [dead_macron, dead_belowmacron, dead_caron, dead_circumflex ] };      //ä
 
-    key <AD02>	{ [         w,          W,        U028B,      section ]	};
+    key <AD02>	{ [         w,          W,        U028B,      U3164 ]	};
+    key <AD03>	{ [         e,          E,     EuroSign,      U0D9E ]	};
 };

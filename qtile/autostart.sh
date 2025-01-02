@@ -18,6 +18,7 @@ playerctld daemon &
 
 dunst &
 picom &
+ibus start &
 
 pactl set-sink-volume @DEFAULT_SINK@ 25%
 nitrogen --random --set-zoom $HOME/.config/qtile/wallpapers/
