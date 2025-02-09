@@ -130,7 +130,7 @@ for vt in range(1, 8):
     )
 
 
-groups = [Group(i) for i in "123asduio"]
+groups = [Group(i) for i in "123yasduio"]
 
 for i in groups:
     keys.extend(
@@ -169,10 +169,10 @@ def autostart():
     Popen([expanduser('~/.config/qtile/autostart.sh')])
     #system(expanduser("~/.nix-profile/bin/nitrogen --set-zoom ~/.config/qtile/wallpapers/wallpaper.png"))
 
-    if 6 <= datetime.now().hour < 11:
-        Popen(["notify-send", "System kann vor 11 Uhr nicht verwendet werden", "Es ist noch vor 11:00. Sie werden in Kürze abgemeldet."])
-        sleep(10)
-        qtile.shutdown()
+    #if 6 <= datetime.now().hour < 11:
+    #    Popen(["notify-send", "System kann vor 11 Uhr nicht verwendet werden", "Es ist noch vor 11:00. Sie werden in Kürze abgemeldet."])
+    #    sleep(10)
+    #    qtile.shutdown()
 
     Popen([expanduser('~/.config/qtile/autostart_post.sh')])
 

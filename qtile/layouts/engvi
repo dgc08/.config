@@ -14,4 +14,5 @@ xkb_symbols "basic" {
 
     key <AD02>	{ [         w,          W,        U028B,      U3164 ]	};
     key <AD03>	{ [         e,          E,     EuroSign,      U0D9E ]	};
+    key <AD04>	{ [         r,          R,   registered,      U262D ]	};
 };

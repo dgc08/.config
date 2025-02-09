@@ -60,7 +60,9 @@
             "enabled": false
         },
         "AlwaysTrust": {
-            "enabled": false
+            "enabled": true,
+            "domain": true,
+            "file": true
         },
         "AnonymiseFileNames": {
             "enabled": false
@@ -135,7 +137,11 @@
             "enableStreamQualityBypass": true,
             "transformStickers": true,
             "transformEmojis": true,
-            "transformCompoundSentence": false
+            "transformCompoundSentence": false,
+            "emojiSize": 48,
+            "hyperLinkText": "{{NAME}}",
+            "useHyperLinks": true,
+            "disableEmbedPermissionCheck": false
         },
         "FakeProfileThemes": {
             "enabled": false
@@ -150,7 +156,7 @@
             "enabled": false
         },
         "ForceOwnerCrown": {
-            "enabled": false
+            "enabled": true
         },
         "FriendInvites": {
             "enabled": true
@@ -164,11 +170,8 @@
         "GreetStickerPicker": {
             "enabled": false
         },
-        "HideAttachments": {
-            "enabled": true
-        },
         "iLoveSpam": {
-            "enabled": false
+            "enabled": true
         },
         "IgnoreActivities": {
             "enabled": false
@@ -179,13 +182,15 @@
             "zoom": 2,
             "nearestNeighbour": false,
             "square": false,
-            "saveZoomValues": true
+            "saveZoomValues": true,
+            "zoomSpeed": 0.5
         },
         "InvisibleChat": {
-            "enabled": false
+            "enabled": true,
+            "savedPasswords": "test123, password, Password"
         },
         "KeepCurrentChannel": {
-            "enabled": false
+            "enabled": true
         },
         "LastFMRichPresence": {
             "enabled": false
@@ -194,7 +199,9 @@
             "enabled": false
         },
         "MemberCount": {
-            "enabled": false
+            "enabled": true,
+            "memberList": true,
+            "toolTip": true
         },
         "MessageClickActions": {
             "enabled": false
@@ -221,14 +228,19 @@
             "enabled": false
         },
         "Moyai": {
-            "enabled": false
+            "enabled": false,
+            "volume": 0.5,
+            "quality": "Normal",
+            "triggerWhenUnfocused": true,
+            "ignoreBots": true,
+            "ignoreBlocked": true
         },
         "MutualGroupDMs": {
             "enabled": false
         },
         "NoBlockedMessages": {
-            "enabled": true,
-            "ignoreBlockedMessages": false
+            "enabled": false,
+            "ignoreMessages": false
         },
         "NoDevtoolsWarning": {
             "enabled": false
@@ -270,13 +282,32 @@
             "enabled": false
         },
         "petpet": {
-            "enabled": false
+            "enabled": true
         },
         "PinDMs": {
             "enabled": true,
             "pinOrder": 0,
             "pinnedDMs": "824222255378726952,761975347432390698,779753481094823979,1138896155875483790,777896784663805982,1000307280023126116",
-            "dmSectioncollapsed": false
+            "dmSectionCollapsed": false,
+            "canCollapseDmSection": false,
+            "userBasedCategoryList": {
+                "761590457594544180": [
+                    {
+                        "id": "oldPins",
+                        "name": "Pins",
+                        "color": 10070709,
+                        "channels": [
+                            "824222255378726952",
+                            "761975347432390698",
+                            "779753481094823979",
+                            "1138896155875483790",
+                            "777896784663805982",
+                            "1000307280023126116"
+                        ]
+                    }
+                ],
+                "824669359867559937": []
+            }
         },
         "PlainFolderIcon": {
             "enabled": true
@@ -297,7 +328,12 @@
             "enabled": false
         },
         "RelationshipNotifier": {
-            "enabled": false
+            "enabled": true,
+            "offlineRemovals": true,
+            "groups": true,
+            "servers": true,
+            "friends": true,
+            "friendRequestCancels": true
         },
         "RevealAllSpoilers": {
             "enabled": false
@@ -342,13 +378,13 @@
             "enabled": false
         },
         "ShowAllMessageButtons": {
-            "enabled": false
+            "enabled": true
         },
         "ShowConnections": {
             "enabled": false
         },
         "ShowHiddenChannels": {
-            "enabled": true,
+            "enabled": false,
             "showMode": 0,
             "hideUnreads": true
         },
@@ -393,7 +429,7 @@
             "enabled": false
         },
         "Translate": {
-            "enabled": true,
+            "enabled": false,
             "autoTranslate": false,
             "showChatBarButton": true
         },
@@ -486,7 +522,8 @@
             "enabled": true
         },
         "ClientTheme": {
-            "enabled": false
+            "enabled": true,
+            "color": "313338"
         },
         "Decor": {
             "enabled": false
@@ -525,7 +562,7 @@
             "role": true
         },
         "ShowHiddenThings": {
-            "enabled": true,
+            "enabled": false,
             "showTimeouts": true,
             "showInvitesPaused": true,
             "showModView": true
@@ -618,7 +655,7 @@
             "enabled": false
         },
         "Summaries": {
-            "enabled": true,
+            "enabled": false,
             "summaryExpiryThresholdDays": 3
         },
         "ShowTimeoutDuration": {
@@ -653,7 +690,7 @@
             "enabled": false
         },
         "AlwaysExpandRoles": {
-            "enabled": false
+            "enabled": true
         },
         "FullSearchContext": {
             "enabled": false
@@ -665,7 +702,8 @@
             "enabled": true
         },
         "AccountPanelServerProfile": {
-            "enabled": false
+            "enabled": true,
+            "prioritizeServerProfile": false
         },
         "CopyFileContents": {
             "enabled": false
@@ -678,6 +716,15 @@
         },
         "StickerPaste": {
             "enabled": false
+        },
+        "FullUserInChatbox": {
+            "enabled": false
+        },
+        "IrcColors": {
+            "enabled": false
+        },
+        "HideMedia": {
+            "enabled": true
         }
     },
     "notifications": {
@@ -690,6 +737,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1735672336547
+        "settingsSyncVersion": 1738787854552
     }
 }

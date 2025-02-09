@@ -4,9 +4,6 @@
 CURRENT_LAYOUT=$(setxkbmap -query | grep layout | awk '{print $2}')
 
 if [ "$CURRENT_LAYOUT" = "kakutr" ]; then
-    setxkbmap -layout "ru" -variant "phonetic"
-    notify-send "Keyboard Layout" "Switched to Russian (Phonetic)"
-elif [ "$CURRENT_LAYOUT" = "ru" ]; then
     setxkbmap -layout "engvi"
     notify-send "Keyboard Layout" "Switched to English (Engvi)"
 else
