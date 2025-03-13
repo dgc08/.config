@@ -6,6 +6,7 @@ let
   ## Aliases
   aliases = {
     a = "tmux a || tmux";
+    gr = "grep -HIrn";
     la = "ls -ahl -v --group-directories-first";
     l = "ls -ahl -v --group-directories-first";
     sys-update = "sudo apt update && sudo apt upgrade && sudo apt autoremove";

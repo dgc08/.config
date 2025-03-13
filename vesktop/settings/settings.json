@@ -559,7 +559,11 @@
             "enabled": true,
             "guild": true,
             "everyone": true,
-            "role": true
+            "role": true,
+            "events": true,
+            "highlights": true,
+            "messages": 3,
+            "showAllChannels": true
         },
         "ShowHiddenThings": {
             "enabled": false,
@@ -690,7 +694,7 @@
             "enabled": false
         },
         "AlwaysExpandRoles": {
-            "enabled": true
+            "enabled": false
         },
         "FullSearchContext": {
             "enabled": false
@@ -724,7 +728,7 @@
             "enabled": false
         },
         "HideMedia": {
-            "enabled": true
+            "enabled": false
         }
     },
     "notifications": {
@@ -737,6 +741,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1738787854552
-    }
+        "settingsSyncVersion": 1740087056439
+    },
+    "eagerPatches": false
 }

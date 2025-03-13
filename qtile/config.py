@@ -130,7 +130,7 @@ for vt in range(1, 8):
     )
 
 
-groups = [Group(i) for i in "123yasduio"]
+groups = [Group(i) for i in "123asduio"]
 
 for i in groups:
     keys.extend(

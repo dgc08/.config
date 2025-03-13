@@ -127,6 +127,11 @@
 (global-set-key (kbd "<escape>") #'god-mode-all)
 (global-set-key (kbd "C-z") #'god-mode-all)
 
+
+(with-eval-after-load 'lisp-mode
+  (define-key lisp-interaction-mode-map (kbd "C-o") 'eval-print-last-sexp))
+
+
 ;; Remap `C-h` to `backward-char`
 (define-key key-translation-map [?\C-h] [?\C-h])
 (global-set-key (kbd "C-#") help-map)
