@@ -4,6 +4,9 @@
 (column-number-mode 1)
 (show-paren-mode 1)
 
+(global-display-line-numbers-mode t)
+(setq display-line-numbers-type 'relative)
+
 (setq use-short-answers t)
 (setq echo-keystrokes 0.1)
 
