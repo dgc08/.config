@@ -7,6 +7,10 @@
 (global-display-line-numbers-mode t)
 (setq display-line-numbers-type 'relative)
 
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+(setq auto-save-list-file-name nil)
+
 (setq use-short-answers t)
 (setq echo-keystrokes 0.1)
 
