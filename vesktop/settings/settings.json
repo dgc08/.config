@@ -7,8 +7,8 @@
     "enabledThemes": [
         "crazy.css"
     ],
-    "enableReactDevtools": false,
-    "frameless": false,
+    "enableReactDevtools": true,
+    "frameless": true,
     "transparent": false,
     "winCtrlQ": false,
     "macosTranslucency": false,
@@ -741,7 +741,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1740087056439
+        "settingsSyncVersion": 1743700734883
     },
     "eagerPatches": false
 }

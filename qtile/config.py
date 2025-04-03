@@ -114,6 +114,7 @@ keys = [
 
     Key([], "XF86Calculator", lazy.spawn("speedcrunch"), desc="calcutor"),
 
+    Key([mod], "r", lazy.spawn("flatpak run it.mijorus.smile"), desc="emoji"),
 ]
 
     # Add key bindings to switch VTs in Wayland.

@@ -6,6 +6,8 @@
     },
     "spellCheckLanguages": [
         "en-US",
-        "en"
+        "en",
+        "de-DE",
+        "de"
     ]
 }

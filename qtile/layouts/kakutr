@@ -5,4 +5,6 @@ xkb_symbols "basic" {
 
     name[Group1]="Kakutro";
     key <AE12>	{ [dead_caron, dead_acute, dead_grave, dead_cedilla ]	};
+
+    key <AD08>  { [    i,      I,      U0131,  dead_tilde   ] };
 };
