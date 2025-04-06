@@ -46,7 +46,6 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    vesktop
     thunderbird
     whatsapp-for-linux
     veracrypt
@@ -187,16 +186,8 @@ in
     bindkey '^k' up-line-or-history
     bindkey '^p' kill-line
 
+    #source $HOME/.config/.profile
 
-    function enter_nix_shell() {
-  if [ -f default.nix ]; then
-    echo "Entering nix-shell for $(pwd)"
-    nix-shell . --command \"zsh\"
-  fi
-}
-
-autoload -U add-zsh-hook
-add-zsh-hook chpwd enter_nix_shell
 '';
   };
 

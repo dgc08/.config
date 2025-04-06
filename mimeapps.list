@@ -9,3 +9,4 @@ application/zip=org.kde.ark.desktop;
 inode/directory=emacsclient.desktop
 text/html=brave-browser.desktop
 x-scheme-handler/ror2mm=r2modman.desktop
+x-scheme-handler/discord=vesktop.desktop

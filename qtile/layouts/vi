@@ -20,4 +20,7 @@ xkb_symbols "basic" {
     key <AC08>  { [    k,      K,      ssharp, yen] };
     key <AD08>  { [    i,      I,      U0131,  dead_tilde   ] };
     key <AB03>  { [    c,      C,      U00E7, copyright ] };
+
+    key <AE01>	{ [         1,     exclam,   U218A,      exclamdown ]	};
+    key <AE02>	{ [         2,   quotedbl,   U218B,      oneeighth  ]	};
 };

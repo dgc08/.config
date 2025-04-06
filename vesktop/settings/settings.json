@@ -252,7 +252,7 @@
             "enabled": false
         },
         "NoProfileThemes": {
-            "enabled": false
+            "enabled": true
         },
         "NoRPC": {
             "enabled": false
@@ -397,7 +397,7 @@
         "SilentTyping": {
             "enabled": true,
             "showIcon": false,
-            "isEnabled": false,
+            "isEnabled": true,
             "contextMenu": true
         },
         "SortFriendRequests": {
@@ -729,6 +729,9 @@
         },
         "HideMedia": {
             "enabled": false
+        },
+        "DisableDeepLinks": {
+            "enabled": true
         }
     },
     "notifications": {
@@ -741,7 +744,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1743700734883
+        "settingsSyncVersion": 1743951593328
     },
     "eagerPatches": false
 }
