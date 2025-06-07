@@ -7,4 +7,7 @@ xkb_symbols "basic" {
     key <AE12>	{ [dead_caron, dead_acute, dead_grave, dead_cedilla ]	};
 
     key <AD08>  { [    i,      I,      U0131,  dead_tilde   ] };
+
+    //key <TLDE>	{ [dead_diaeresis, degree,	dead_circumflex,    U2033	] };
+
 };

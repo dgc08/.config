@@ -24,6 +24,6 @@
 
 /* Use Ubuntu Font Globally with Fallback */
 * {
-    font-family: 'Ubuntu', 'Noto Sans', sans-serif !important;
+    font-family: 'Ubuntu', 'DejaVu Sans', 'Noto Sans', sans-serif !important;
     font-size: 17px !important;
 }

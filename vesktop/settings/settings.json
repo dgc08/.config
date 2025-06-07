@@ -118,9 +118,6 @@
             "enabled": true,
             "type": 0
         },
-        "EmoteCloner": {
-            "enabled": true
-        },
         "Experiments": {
             "enabled": true,
             "enableIsStaff": false,
@@ -141,7 +138,8 @@
             "emojiSize": 48,
             "hyperLinkText": "{{NAME}}",
             "useHyperLinks": true,
-            "disableEmbedPermissionCheck": false
+            "disableEmbedPermissionCheck": false,
+            "stickerSize": 160
         },
         "FakeProfileThemes": {
             "enabled": false
@@ -397,7 +395,7 @@
         "SilentTyping": {
             "enabled": true,
             "showIcon": false,
-            "isEnabled": true,
+            "isEnabled": false,
             "contextMenu": true
         },
         "SortFriendRequests": {
@@ -461,7 +459,18 @@
             "enabled": false
         },
         "VcNarrator": {
-            "enabled": false
+            "enabled": false,
+            "volume": 1,
+            "rate": 1,
+            "sayOwnName": false,
+            "latinOnly": false,
+            "joinMessage": "{{USER}} joined",
+            "leaveMessage": "{{USER}} left",
+            "moveMessage": "{{USER}} moved to {{CHANNEL}}",
+            "muteMessage": "{{USER}} muted",
+            "unmuteMessage": "{{USER}} unmuted",
+            "deafenMessage": "{{USER}} deafened",
+            "undeafenMessage": "{{USER}} undeafened"
         },
         "VencordToolbox": {
             "enabled": false
@@ -473,7 +482,9 @@
             "enabled": false
         },
         "VoiceMessages": {
-            "enabled": false
+            "enabled": true,
+            "noiseSuppression": true,
+            "echoCancellation": true
         },
         "VolumeBooster": {
             "enabled": true,
@@ -522,7 +533,7 @@
             "enabled": true
         },
         "ClientTheme": {
-            "enabled": true,
+            "enabled": false,
             "color": "313338"
         },
         "Decor": {
@@ -732,6 +743,9 @@
         },
         "DisableDeepLinks": {
             "enabled": true
+        },
+        "ExpressionCloner": {
+            "enabled": true
         }
     },
     "notifications": {
@@ -744,7 +758,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1743951593328
+        "settingsSyncVersion": 1748602401111
     },
     "eagerPatches": false
 }

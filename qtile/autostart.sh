@@ -24,7 +24,7 @@ dunst &
 playerctld daemon &
 emacs --daemon &
 
-pactl set-sink-volume @DEFAULT_SINK@ 25%
+pactl set-sink-volume @DEFAULT_SINK@ 18%
 nitrogen --random --set-zoom $HOME/.config/qtile/wallpapers/
 
 picom &

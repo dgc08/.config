@@ -2,7 +2,9 @@
     "splashColor": "rgba(255, 255, 255, 0.6)",
     "splashBackground": "rgb(22, 25, 33)",
     "audio": {
-        "workaround": false
+        "workaround": false,
+        "onlyDefaultSpeakers": false,
+        "onlySpeakers": false
     },
     "spellCheckLanguages": [
         "en-US",

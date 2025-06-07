@@ -114,6 +114,8 @@ keys = [
 
     Key([], "XF86Calculator", lazy.spawn("speedcrunch"), desc="calcutor"),
 
+    Key([mod], "k", lazy.spawn("killall python3 -9"), desc="calcutor"),
+
     Key([mod], "r", lazy.spawn("flatpak run it.mijorus.smile"), desc="emoji"),
 ]
 
@@ -157,12 +159,6 @@ for i in groups:
         ]
     )
 
-@hook.subscribe.client_new
-def set_floating(window):
-    if window.window.get_name() == "Emacs Everywhere":
-        window.floating = True
-        window.tweak_floating(x=100, y=100, width=800, height=600)
-
 @hook.subscribe.startup_once
 def autostart():
     from subprocess import Popen
@@ -170,7 +166,7 @@ def autostart():
     Popen([expanduser('~/.config/qtile/autostart.sh')])
     #system(expanduser("~/.nix-profile/bin/nitrogen --set-zoom ~/.config/qtile/wallpapers/wallpaper.png"))
 
-    #if 6 <= datetime.now().hour < 11:
+    # if 6 <= datetime.now().hour < 11:
     #    Popen(["notify-send", "System kann vor 11 Uhr nicht verwendet werden", "Es ist noch vor 11:00. Sie werden in Kürze abgemeldet."])
     #    sleep(10)
     #    qtile.shutdown()
@@ -243,7 +239,8 @@ floating_layout = layout.Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
-        Match(title="Emacs Everywhere"),
+        Match(title="emacs-everywhere"),
+        Match(title="Smile"),
         Match(wm_class="confirmreset"),  # gitk
         Match(wm_class="makebranch"),  # gitk
         Match(wm_class="maketag"),  # gitk

@@ -10,9 +10,9 @@ xkb_symbols "basic" {
                   [dead_caron, question, backslash, questiondown, 0x1001E9E ]};
     key <AE12>	{ [dead_grave, dead_acute, dead_cedilla,  dead_ogonek ]	};
 
-    key <AD11>	{ [dead_tilde, dead_macron, dead_abovering, dead_belowring ] };          //ü
+    key <AD11>	{ [dead_tilde, dead_macron, dead_abovedot, dead_belowring ] };          //ü
     key <AC10>	{ [dead_diaeresis, dead_breve,  dead_caron, ssharp] };            //ö
-    key <AC11>	{ [dead_abovedot, dead_belowmacron, dead_belowdot, dead_circumflex ] };      //ä
+    key <AC11>	{ [dead_abovering, dead_belowmacron, dead_belowdot, dead_circumflex ] };      //ä
 
     key <AD02>	{ [         w,          W,        U028B,      U3164 ]	};
     key <AD03>	{ [         e,          E,     EuroSign,      U0D9E ]	};
