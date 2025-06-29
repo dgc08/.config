@@ -11,3 +11,5 @@
 	email = "digc0820@gmail.com"
 	name = "Sinthoras39"
 	signingKey = "69E4AF976838CFE7"
+[safe]
+	directory = /usr/bin/qtile

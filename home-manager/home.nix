@@ -58,9 +58,6 @@ in
     hunspellDicts.de_DE
     hunspellDicts.en_US
 
-    ffmpeg
-    yt-dlp
-
     vlc
     fontfinder
 
