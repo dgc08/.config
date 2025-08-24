@@ -88,6 +88,7 @@ keys = [
 
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
     Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
+    Key([mod], "b", lazy.hide_show_bar(), desc="Hides the bar"),
 
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
 
@@ -174,11 +175,11 @@ def autostart():
     Popen([expanduser('~/.config/qtile/autostart_post.sh')])
 
 layouts = [
-    layout.Bsp(fair = False, grow_amount = 5), # I love bsp
+    layout.Columns(num_colums = 3, grow_amount = 5, border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=2, initial_ratio=1.5),
+    #layout.Bsp(fair = False, grow_amount = 5), # I love bsp
     layout.Max(),
-    # layout.Tile(border_on_single=False, border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    # layout.MonadTall(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    # layout.Columns(num_colums = 3, border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    #layout.Tile(border_on_single=False, border_width=1),
+    #layout.MonadTall(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
     # layout.TreeTab(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=4),

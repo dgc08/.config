@@ -1,10 +1,11 @@
 {
-    "splashColor": "rgba(255, 255, 255, 0.6)",
+    "splashColor": "rgb(223, 224, 226)",
     "splashBackground": "rgb(22, 25, 33)",
     "audio": {
         "workaround": false,
         "onlyDefaultSpeakers": false,
-        "onlySpeakers": false
+        "onlySpeakers": false,
+        "ignoreVirtual": true
     },
     "spellCheckLanguages": [
         "en-US",
