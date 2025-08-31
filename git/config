@@ -13,3 +13,4 @@
 	signingKey = "69E4AF976838CFE7"
 [safe]
 	directory = /usr/bin/qtile
+	directory = /Library/opt/xone

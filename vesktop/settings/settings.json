@@ -395,7 +395,7 @@
         "SilentTyping": {
             "enabled": true,
             "showIcon": false,
-            "isEnabled": false,
+            "isEnabled": true,
             "contextMenu": true
         },
         "SortFriendRequests": {
@@ -746,6 +746,12 @@
         },
         "ExpressionCloner": {
             "enabled": true
+        },
+        "CopyStickerLinks": {
+            "enabled": false
+        },
+        "ImageFilename": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -758,7 +764,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1753967829740
+        "settingsSyncVersion": 1756680222007
     },
     "eagerPatches": false
 }
