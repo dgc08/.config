@@ -31,3 +31,7 @@ size = 14.5
 
 [window]
 opacity = 0.95
+
+[window.padding]
+x = 5
+y = 5

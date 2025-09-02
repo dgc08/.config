@@ -69,7 +69,7 @@ widgets = [
     widget.PulseVolume(
         padding=5,
         mouse_callbacks={'Button1': lazy.spawn("pavucontrol")},
-        fmt='󰕾  {}',
+        fmt='󰕾   {}',
     ),
     separator,
     widget.Net(
@@ -80,7 +80,7 @@ widgets = [
     widget.KeyboardLayout(
         configured_keyboards=["kakutr", "engvi", "ru phonetic"],
         display_map={"kakutr": "kakutro", "vi": "multitro", "ru phonetic": "russian"},  # Optional display customization
-        fmt='󰌌 {}',
+        fmt='󰌌   {}',
     ),
     separator,
     widget.CurrentLayout(),
