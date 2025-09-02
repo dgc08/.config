@@ -1,5 +1,5 @@
 [global]
-    font = "Hack 8"
+    font = "Hack 9"
     allow_markup = yes
     format = "<b>%s</b>\n%b"
     sort = yes
@@ -21,9 +21,8 @@
     horizontal_padding = 8
     separator_color = "#585858"
     startup_notification = false
-    # https://github.com/knopwob/dunst/issues/26#issuecomment-36159395
-    #icon_position = left
-    #icon_folders = /usr/share/icons/elementary/actions/16/
+    frame_width = 2
+    gap_size = 3
 
 [frame]
     width = 1
@@ -31,7 +30,7 @@
 
 [shortcuts]
     close = ctrl+space
-    close_all = super+shift+space
+    close_all = ctrl+shift+space
     history = ctrl+grave
     context = ctrl+shift+period
 
@@ -43,7 +42,7 @@
 [urgency_normal]
     background = "#282828"
     foreground = "#ebdbb2"
-    timeout = 10
+    timeout = 20
 
 [urgency_critical]
     background = "#282828"

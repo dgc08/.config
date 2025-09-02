@@ -8,6 +8,6 @@ xkb_symbols "basic" {
 
     key <AD08>  { [    i,      I,      U0131,  dead_tilde   ] };
 
-    //key <TLDE>	{ [dead_diaeresis, degree,	dead_circumflex,    U2033	] };
+    key <TLDE>	{ [dead_abovering, dead_circumflex, degree,	 U2033	] };
 
 };

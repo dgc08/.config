@@ -27,7 +27,7 @@ emacs --daemon &
 pactl set-sink-volume @DEFAULT_SINK@ 24%
 nitrogen --random --set-zoom $HOME/.config/qtile/wallpapers/
 
-picom --backend glx &
+picom &
 
 #echo " Ran QTile autostart, reached end successfully" >> .log
 #$(date +"%r %a %d %h %y)

@@ -6,6 +6,8 @@ from libqtile.config import Screen
 
 from datetime import datetime
 
+from colors import *
+
 current_hour = datetime.now().hour
 
 # Determine the appropriate greeting based on the current hour
@@ -20,19 +22,35 @@ elif 5 <= current_hour < 10:
 else:
     day_text = "Hallo und Guten Abend"
 
+widget_defaults = dict(
+    font=DEFAULT_FONT,
+    background=color_schema['bg'],
+    foreground=color_schema['fg'],
+    fontsize=14,
+    padding=10,
+)
+extension_defaults = widget_defaults.copy()
 
+separator = widget.Sep(padding=10, size_percent=50, foreground=color_schema['fg3'])
 widgets = [
-    widget.CurrentLayout(
-        padding=5
+    widget.GroupBox(
+        disable_drag=True,
+        use_mouse_wheel=False,
+        active=color_schema['fg'],
+        inactive=color_schema['dark-gray'],
+        highlight_method='text',
+        this_current_screen_border=color_schema['dark-yellow'],
+        urgent_alert_method='text',
+        urgent_text=color_schema['dark-red'],
+        fontsize=18,
+        padding=1,
     ),
-    widget.TextBox(" |  Layout: "),
-    widget.KeyboardLayout(
-        configured_keyboards=["kakutr", "engvi", "ru phonetic"],  # Add layouts you want to toggle
-        display_map={"kakutr": "kakutropos", "vi": "multitropos", "ru phonetic": "russian"},  # Optional display customization
-        padding=5
-    ),
-    widget.TextBox(" | "),
+
+    separator,
     widget.WindowName(),
+    widget.Spacer(),
+    widget.Clock(format='%d %b %H:%M:%S'),
+    widget.Spacer(),
     widget.Systray(),
     # widget.Chord(
     #     chords_colors={
@@ -41,30 +59,29 @@ widgets = [
     #     name_transform=lambda name: name.upper(),
     # ),
     widget.TextBox("  " + day_text, foreground="#31cccc"),
-    widget.TextBox(" | "),
-
+    separator,
     widget.Memory(
         mouse_callbacks={'Button1': lambda qtile: qtile.cmd_spawn(
             self.termite + ' -e htop')},
         padding=5
     ),
-    widget.TextBox(" | "),
-    widget.TextBox(
-        text="  ",
-        padding=0,
-        mouse_callbacks={'Button1': lazy.spawn("pavucontrol")},
-    ),
+    separator,
     widget.PulseVolume(
         padding=5,
         mouse_callbacks={'Button1': lazy.spawn("pavucontrol")},
+        fmt='󰕾  {}',
     ),
-    widget.TextBox(" | "),
+    separator,
     widget.Net(
         interface="enp4s0",
         mouse_callbacks={'Button1': lazy.spawn("nm-connection-editor")},
     ),
-    widget.TextBox(" | "),
-    widget.Clock(
-        format="%B %d  [ %H:%M:%S ]"
-    )
+    separator,
+    widget.KeyboardLayout(
+        configured_keyboards=["kakutr", "engvi", "ru phonetic"],
+        display_map={"kakutr": "kakutro", "vi": "multitro", "ru phonetic": "russian"},  # Optional display customization
+        fmt='󰌌 {}',
+    ),
+    separator,
+    widget.CurrentLayout(),
 ]

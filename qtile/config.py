@@ -38,6 +38,9 @@ from os import system
 from datetime import datetime
 from time import sleep
 
+from widgets import widgets
+from colors import *
+
 mod = "mod4"
 office = [mod, "shift", "control", "mod1"] #stupid office key from microsoft keyboard
 terminal = "alacritty"
@@ -197,7 +200,6 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-from widgets import widgets
 screens = [
     Screen(
         top=bar.Bar(
@@ -206,20 +208,10 @@ screens = [
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
-        bottom=bar.Bar(
-            [
-                widget.GroupBox(),
-                # widget.TextBox(" || "),
-                widget.Prompt(),
-            ],
-            24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-        ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
-        x11_drag_polling_rate = 60,
+        x11_drag_polling_rate = 120,
     ),
 ]
 
@@ -250,6 +242,12 @@ floating_layout = layout.Floating(
         Match(title="pinentry"),  # GPG key password entry
     ]
 )
+
+from widgets import widget_defaults
+
+follow_mouse_focus = True
+bring_front_click = False
+cursor_warp = False
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True

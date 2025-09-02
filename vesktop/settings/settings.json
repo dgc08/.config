@@ -395,7 +395,7 @@
         "SilentTyping": {
             "enabled": true,
             "showIcon": false,
-            "isEnabled": true,
+            "isEnabled": false,
             "contextMenu": true
         },
         "SortFriendRequests": {
@@ -764,7 +764,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1756680222007
+        "settingsSyncVersion": 1756821610731
     },
     "eagerPatches": false
 }
