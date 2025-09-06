@@ -33,6 +33,7 @@ from libqtile.utils import guess_terminal
 
 from libqtile import hook
 
+from subprocess import Popen
 from os.path import expanduser
 from os import system
 from datetime import datetime
@@ -87,7 +88,7 @@ keys = [
     Key([mod, "control"], "z", lazy.spawn("setxkbmap -option caps:swapescape")),
 
     Key([mod], "q", lazy.spawn("emacsclient -c"), desc="Texteditor"),
-    Key([mod], "e", lazy.spawn("emacsclient --eval \"(emacs-everywhere)\" --frame-parameters '((name . \"Emacs Everywhere\"))'")),
+    Key([mod], "e", lazy.spawn("thunar")),
 
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
     Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
@@ -95,13 +96,10 @@ keys = [
 
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
 
-    Key([mod], "p", lazy.spawn("i3lock --color #FF6F00"), desc="Lock screen"),
+    Key([mod], "p", lazy.spawn("i3lock"), desc="Lock screen"),
     Key([mod, "control"], "p", lazy.shutdown(), desc="Log out/Shutdown Qtile"),
 
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-
-
-    # Keyboard shortcuts for media
+        # Keyboard shortcuts for media
     Key([mod], "y", lazy.spawn("playerctl previous"), desc="Previous media"),
     Key([mod, "control"], "y", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -1%"), desc="Dec volume"),
     Key([mod], "x", lazy.spawn("playerctl play-pause"), desc="Play/Pause"),
@@ -118,7 +116,7 @@ keys = [
 
     Key([], "XF86Calculator", lazy.spawn("speedcrunch"), desc="calcutor"),
 
-    Key([mod], "k", lazy.spawn("killall python3 -9"), desc="calcutor"),
+    #Key([mod], "k", lazy.spawn("killall python3 -9"), desc="calcutor"),
 
     Key([mod], "r", lazy.spawn("flatpak run it.mijorus.smile"), desc="emoji"),
 ]
@@ -137,7 +135,7 @@ for vt in range(1, 8):
     )
 
 
-groups = [Group(i) for i in "123asduio"]
+groups = [Group(i) for i in "123asduiom"]
 
 for i in groups:
     keys.extend(
@@ -163,23 +161,18 @@ for i in groups:
         ]
     )
 
-@hook.subscribe.startup_once
+@hook.subscribe.startup
 def autostart():
-    from subprocess import Popen
-
     Popen([expanduser('~/.config/qtile/autostart.sh')])
-    #system(expanduser("~/.nix-profile/bin/nitrogen --set-zoom ~/.config/qtile/wallpapers/wallpaper.png"))
+    print("Ran reset-autostart")
 
-    # if 6 <= datetime.now().hour < 11:
-    #    Popen(["notify-send", "System kann vor 11 Uhr nicht verwendet werden", "Es ist noch vor 11:00. Sie werden in Kürze abgemeldet."])
-    #    sleep(10)
-    #    qtile.shutdown()
-
+@hook.subscribe.startup_once
+def autostart_once():
     Popen([expanduser('~/.config/qtile/autostart_post.sh')])
 
 layouts = [
     layout.Columns(num_colums = 3, grow_amount = 5, border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=2, initial_ratio=1.5),
-    #layout.Bsp(fair = False, grow_amount = 5), # I love bsp
+    #layout.Bsp(fair = False, grow_amount = 5),
     layout.Max(),
     #layout.Tile(border_on_single=False, border_width=1),
     #layout.MonadTall(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),

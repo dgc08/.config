@@ -47,41 +47,61 @@ widgets = [
     ),
 
     separator,
+    widget.Systray(),
+    separator,
     widget.WindowName(),
     widget.Spacer(),
     widget.Clock(format='%d %b %H:%M:%S'),
     widget.Spacer(),
-    widget.Systray(),
     # widget.Chord(
     #     chords_colors={
     #         "launch": ("#ff0000", "#ffffff"),
     #     },
     #     name_transform=lambda name: name.upper(),
     # ),
-    widget.TextBox("  " + day_text, foreground="#31cccc"),
+    #widget.TextBox("  " + day_text, foreground="#31cccc"),
+    widget.ThermalSensor(
+        tag_sensor="Tctl",
+        threshold=60, foreground_alert='ff6000',
+    ),
     separator,
     widget.Memory(
         mouse_callbacks={'Button1': lambda qtile: qtile.cmd_spawn(
-            self.termite + ' -e htop')},
+            'btop')},
         padding=5
     ),
     separator,
     widget.PulseVolume(
         padding=5,
         mouse_callbacks={'Button1': lazy.spawn("pavucontrol")},
-        fmt='󰕾   {}',
+        fmt='󰕾 {}',
     ),
     separator,
     widget.Net(
-        interface="enp4s0",
+        interface="enp6s0",
         mouse_callbacks={'Button1': lazy.spawn("nm-connection-editor")},
+        format='{down:03.0f}{down_suffix} ↓↑ {up:03.0f}{up_suffix}',
+        width=135,
     ),
     separator,
     widget.KeyboardLayout(
         configured_keyboards=["kakutr", "engvi", "ru phonetic"],
         display_map={"kakutr": "kakutro", "vi": "multitro", "ru phonetic": "russian"},  # Optional display customization
-        fmt='󰌌   {}',
+        fmt='󰌌 {}',
     ),
     separator,
     widget.CurrentLayout(),
+    separator,
+    widget.TextBox(
+        '󰐥', fontsize=19,
+        mouse_callbacks={'Button1': lazy.spawn("systemctl poweroff")},
+    ),
+    widget.TextBox(
+        '󰜉', fontsize=19,
+        mouse_callbacks={'Button1': lazy.spawn("systemctl reboot")},
+    ),
+    widget.TextBox(
+        '󰤄', fontsize=19,
+        mouse_callbacks={'Button1': lazy.spawn("systemctl suspend")},
+    ),
 ]

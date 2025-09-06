@@ -1,12 +1,13 @@
 [Added Associations]
 application/pdf=brave-browser.desktop;
-application/zip=org.kde.ark.desktop;
+application/zip=io.github.peazip.PeaZip;
 inode/directory=emacsclient.desktop;emacs.desktop
 
 [Default Applications]
 application/pdf=brave-browser.desktop;
-application/zip=org.kde.ark.desktop;
-inode/directory=emacsclient.desktop
+application/zip=io.github.peazip.PeaZip;
+inode/directory=thunar.desktop;
 text/html=brave-browser.desktop
 x-scheme-handler/ror2mm=r2modman.desktop
 x-scheme-handler/discord=vesktop.desktop
+text/plain=emacsclient.desktop
