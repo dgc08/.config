@@ -1,38 +1,43 @@
 [global]
-    font = "Hack 9"
+    font = "Hack 11"
     allow_markup = yes
     format = "<b>%s</b>\n%b"
     sort = yes
     indicate_hidden = yes
-    alignment = center
-    bounce_freq = 0
-    show_age_threshold = 60
+    show_indicators = no
     word_wrap = yes
     ignore_newline = no
-    geometry = "200x5-6+30"
-    transparency = 0
-    idle_threshold = 120
+
+    # Position & layout
     monitor = 0
     follow = mouse
-    sticky_history = yes
-    line_height = 0
-    separator_height = 2
-    padding = 8
-    horizontal_padding = 8
-    separator_color = "#585858"
-    startup_notification = false
+    origin = top-right
+    alignment = left
+    offset = 20x40
+    padding = 16
+    horizontal_padding = 20
     frame_width = 2
-    gap_size = 3
+    frame_color = "#d79921"
+    separator_height = 2
+    separator_color = frame
+    gap_size = 10
+    corner_radius = 10
 
-[frame]
-    width = 1
-    color = "#83a598"
+    # Timeouts
+    idle_threshold = 0
+    sticky_history = yes
+    history_length = 20
+    show_age_threshold = 60
+    message_timeout = 6
 
-[shortcuts]
-    close = ctrl+space
-    close_all = ctrl+shift+space
-    history = ctrl+grave
-    context = ctrl+shift+period
+    # Icons
+    icon_position = left
+    min_icon_size = 32
+    max_icon_size = 48
+    scale = 0
+
+    # Transparency (requires a compositor like picom)
+    transparency = 10
 
 [urgency_low]
     background = "#282828"
@@ -42,9 +47,11 @@
 [urgency_normal]
     background = "#282828"
     foreground = "#ebdbb2"
-    timeout = 20
+    frame_color = "#d79921"
+    timeout = 6
 
 [urgency_critical]
     background = "#282828"
     foreground = "#ebdbb2"
+    frame_color = "#cc241d"
     timeout = 0

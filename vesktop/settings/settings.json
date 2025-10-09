@@ -92,7 +92,7 @@
             "enabled": false
         },
         "BiggerStreamPreview": {
-            "enabled": false
+            "enabled": true
         },
         "BlurNSFW": {
             "enabled": true,
@@ -199,7 +199,8 @@
         "MemberCount": {
             "enabled": true,
             "memberList": true,
-            "toolTip": true
+            "toolTip": true,
+            "voiceActivity": true
         },
         "MessageClickActions": {
             "enabled": false
@@ -404,7 +405,8 @@
         "SpotifyControls": {
             "enabled": true,
             "hoverControls": false,
-            "useSpotifyUris": false
+            "useSpotifyUris": false,
+            "previousButtonRestartsTrack": true
         },
         "SpotifyCrack": {
             "enabled": true,
@@ -748,7 +750,7 @@
             "enabled": true
         },
         "CopyStickerLinks": {
-            "enabled": false
+            "enabled": true
         },
         "ImageFilename": {
             "enabled": false
@@ -764,7 +766,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1756821610731
+        "settingsSyncVersion": 1758998468018
     },
     "eagerPatches": false
 }

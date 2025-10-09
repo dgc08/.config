@@ -11,7 +11,7 @@ export QT_STYLE_OVERRIDE=Breeze
 killall ibus-daemon
 ibus-daemon -rxRd &
 
-nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+#nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
 xrandr --dpi 110
 
 xset s 180 120
@@ -34,6 +34,11 @@ nitrogen --random --set-zoom $HOME/.config/qtile/wallpapers/
 
 killall picom
 picom &
+
+killall redshift
+killall redshift-gtk
+redshift-gtk -c .config/redshift.conf &
+
 
 #echo " Ran QTile autostart, reached end successfully" >> .log
 #$(date +"%r %a %d %h %y)

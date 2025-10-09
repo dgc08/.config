@@ -16,7 +16,7 @@ xkb_symbols "basic" {
 
     key <AD02>	{ [         w,          W,        U028B,      U3164 ]	};
     key <AD03>	{ [         e,          E,     EuroSign,      U0D9E ]	};
-    key <AD04>	{ [         r,          R,   registered,      U262D ]	};
+    key <AD04>	{ [         r,          R,   U02DE,      U262D ]	};
     key <AC08>  { [    k,      K,      ssharp, yen] };
     key <AD08>  { [    i,      I,      U0131,  dead_tilde   ] };
     key <AB03>  { [    c,      C,      U00E7, copyright ] };

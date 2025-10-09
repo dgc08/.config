@@ -1,7 +1,7 @@
 [Added Associations]
 application/pdf=brave-browser.desktop;
 application/zip=io.github.peazip.PeaZip;
-inode/directory=emacsclient.desktop;emacs.desktop
+inode/directory=io.github.peazip.PeaZip.desktop;thunar.desktop;
 
 [Default Applications]
 application/pdf=brave-browser.desktop;
@@ -10,4 +10,4 @@ inode/directory=thunar.desktop;
 text/html=brave-browser.desktop
 x-scheme-handler/ror2mm=r2modman.desktop
 x-scheme-handler/discord=vesktop.desktop
-text/plain=emacsclient.desktop
+text/plain=ed.desktop

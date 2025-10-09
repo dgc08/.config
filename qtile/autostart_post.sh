@@ -13,9 +13,7 @@ qtile run-cmd -g 3 vesktop &
 
 qtile run-cmd -g m easyeffects &
 
-qtile run-cmd -g u pavucontrol &
+qtile run-cmd -g u pwvucontrol &
 qtile run-cmd -g u alacritty -e "/usr/bin/btop" &
 
 qtile run-cmd -g 1 alacritty -e bash -c "echo Available updates:; /usr/bin/checkupdates; cat" &
-
-redshift-gtk -c .config/redshift.conf &

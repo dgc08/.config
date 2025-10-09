@@ -27,3 +27,7 @@
     font-family: 'Ubuntu', 'DejaVu Sans', 'Noto Sans', sans-serif !important;
     font-size: 17px !important;
 }
+
+code, pre, .codeBlock {
+    font-family: 'Ubuntu Mono', 'DejaVu Sans Mono', 'Noto Sans Mono', monospace !important;
+}

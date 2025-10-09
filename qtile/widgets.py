@@ -100,8 +100,4 @@ widgets = [
         '󰜉', fontsize=19,
         mouse_callbacks={'Button1': lazy.spawn("systemctl reboot")},
     ),
-    widget.TextBox(
-        '󰤄', fontsize=19,
-        mouse_callbacks={'Button1': lazy.spawn("systemctl suspend")},
-    ),
 ]
