@@ -5,7 +5,8 @@
         "workaround": false,
         "onlyDefaultSpeakers": false,
         "onlySpeakers": false,
-        "ignoreVirtual": true
+        "ignoreVirtual": true,
+        "deviceSelect": true
     },
     "spellCheckLanguages": [
         "en-US",

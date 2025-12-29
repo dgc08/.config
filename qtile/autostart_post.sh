@@ -11,7 +11,7 @@ qtile run-cmd -g 1 brave --pasword-store=basic &
 qtile run-cmd -g 2 emacsclient -c &
 qtile run-cmd -g 3 vesktop &
 
-qtile run-cmd -g m easyeffects &
+#qtile run-cmd -g m easyeffects &
 
 qtile run-cmd -g u pwvucontrol &
 qtile run-cmd -g u alacritty -e "/usr/bin/btop" &

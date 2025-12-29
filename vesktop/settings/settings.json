@@ -302,7 +302,8 @@
                             "777896784663805982",
                             "1000307280023126116",
                             "1335241345329266739"
-                        ]
+                        ],
+                        "collapsed": false
                     }
                 ],
                 "824669359867559937": []
@@ -594,7 +595,8 @@
         "BetterSettings": {
             "enabled": true,
             "disableFade": true,
-            "eagerLoad": true
+            "eagerLoad": true,
+            "organizeMenu": true
         },
         "FriendsSince": {
             "enabled": false
@@ -766,7 +768,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1758998468018
+        "settingsSyncVersion": 1760898169968
     },
     "eagerPatches": false
 }

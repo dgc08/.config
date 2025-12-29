@@ -119,6 +119,7 @@ keys = [
     #Key([mod], "k", lazy.spawn("killall python3 -9"), desc="calcutor"),
 
     Key([mod], "r", lazy.spawn("flatpak run it.mijorus.smile"), desc="emoji"),
+    Key([mod], "v", lazy.spawn("rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'"), desc="clipboard"),
 ]
 
     # Add key bindings to switch VTs in Wayland.
