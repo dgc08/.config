@@ -1,6 +1,7 @@
-(tool-bar-mode -1)
+(when (display-graphic-p)
+   (tool-bar-mode -1)
+   (scroll-bar-mode -1))
 (menu-bar-mode -1)
-(scroll-bar-mode -1)
 (column-number-mode 1)
 (show-paren-mode 1)
 
@@ -134,6 +135,7 @@
 (global-set-key (kbd "<escape>") #'god-mode-all)
 (global-set-key (kbd "C-z") #'god-mode-all)
 
+(define-key dired-mode-map (kbd "-") 'dired-up-directory)
 
 (with-eval-after-load 'lisp-mode
   (define-key lisp-interaction-mode-map (kbd "C-o") 'eval-print-last-sexp))
