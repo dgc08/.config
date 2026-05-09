@@ -5,7 +5,7 @@
     "useQuickCss": true,
     "themeLinks": [],
     "enabledThemes": [
-        "crazy.css"
+        "gruv.css"
     ],
     "enableReactDevtools": true,
     "frameless": true,
@@ -214,9 +214,6 @@
         "MessageLogger": {
             "enabled": false
         },
-        "MessageTags": {
-            "enabled": false
-        },
         "MoreCommands": {
             "enabled": false
         },
@@ -306,7 +303,8 @@
                         "collapsed": false
                     }
                 ],
-                "824669359867559937": []
+                "824669359867559937": [],
+                "1456980121469714585": []
             }
         },
         "PlainFolderIcon": {
@@ -333,7 +331,8 @@
             "groups": true,
             "servers": true,
             "friends": true,
-            "friendRequestCancels": true
+            "friendRequestCancels": true,
+            "notices": false
         },
         "RevealAllSpoilers": {
             "enabled": false
@@ -389,7 +388,11 @@
             "hideUnreads": true
         },
         "ShowMeYourName": {
-            "enabled": false
+            "enabled": true,
+            "mode": "nick-user",
+            "friendNicknames": "dms",
+            "displayNames": false,
+            "inReplies": false
         },
         "SilentMessageToggle": {
             "enabled": false
@@ -491,7 +494,7 @@
         },
         "VolumeBooster": {
             "enabled": true,
-            "multiplier": 2
+            "multiplier": 2.5
         },
         "WhoReacted": {
             "enabled": true
@@ -512,7 +515,7 @@
             "enabled": false
         },
         "FixSpotifyEmbeds": {
-            "enabled": false
+            "enabled": true
         },
         "Dearrow": {
             "enabled": true,
@@ -527,7 +530,10 @@
             "enabled": false
         },
         "OnePingPerDM": {
-            "enabled": false
+            "enabled": true,
+            "channelToAffect": "both_dms",
+            "allowMentions": false,
+            "allowEveryone": false
         },
         "PermissionFreeWill": {
             "enabled": false
@@ -611,7 +617,7 @@
             "enabled": false
         },
         "StreamerModeOnStream": {
-            "enabled": false
+            "enabled": true
         },
         "UnlockedAvatarZoom": {
             "enabled": false
@@ -693,7 +699,8 @@
             "enabled": true
         },
         "WebScreenShareFixes": {
-            "enabled": true
+            "enabled": true,
+            "experimentalAV1Support": false
         },
         "WebContextMenus": {
             "enabled": true,
@@ -756,6 +763,16 @@
         },
         "ImageFilename": {
             "enabled": false
+        },
+        "MoreQuickReactions": {
+            "enabled": false
+        },
+        "CustomCommands": {
+            "enabled": true,
+            "tagsList": {}
+        },
+        "CharacterCounter": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -768,7 +785,11 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1760898169968
+        "settingsSyncVersion": 1777244170452
     },
-    "eagerPatches": false
+    "eagerPatches": false,
+    "uiElements": {
+        "chatBarButtons": {},
+        "messagePopoverButtons": {}
+    }
 }

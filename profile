@@ -51,3 +51,8 @@ export EDITOR="emacsclient -n -a emacs -c"
 
 [ -f "/home/dgc/.ghcup/env" ] && . "/home/dgc/.ghcup/env" # ghcup-env
 [ -f "/home/dgc/.cargo/env" ] && . "/home/dgc/.cargo/env" # cargo-env
+#
+# Add TeX Live to PATH
+export PATH="/usr/local/texlive/2026/bin/x86_64-linux:$PATH"
+export INFOPATH="/usr/local/texlive/2026/texmf-dist/doc/info:$INFOPATH"
+export MANPATH="/usr/local/texlive/2026/texmf-dist/doc/man:$MANPATH"

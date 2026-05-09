@@ -17,7 +17,7 @@ xrandr --dpi 110
 xset s 180 120
 xss-lock -n /usr/share/doc/xss-lock/dim-screen.sh -- i3lock -n &
 
-setxkbmap -option caps:swapescape
+#setxkbmap -option caps:swapescape
 setxkbmap -layout "kakutr"
 
 killall dunst

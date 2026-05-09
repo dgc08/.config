@@ -1,6 +1,6 @@
 {
-    "splashColor": "rgb(239, 239, 240)",
-    "splashBackground": "rgb(22, 25, 33)",
+    "splashColor": "rgb(235, 219, 178)",
+    "splashBackground": "rgb(29, 32, 33)",
     "audio": {
         "workaround": false,
         "onlyDefaultSpeakers": false,
@@ -13,5 +13,6 @@
         "en",
         "de-DE",
         "de"
-    ]
+    ],
+    "hardwareVideoAcceleration": false
 }
