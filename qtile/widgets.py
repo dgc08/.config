@@ -22,6 +22,14 @@ elif 5 <= current_hour < 10:
 else:
     day_text = "Hallo und Guten Abend"
 
+def mic_status():
+    status = os.popen('pactl get-source-mute @DEFAULT_SOURCE@').read().strip()
+    is_muted = 'yes' in status.lower()
+    return '🔇' if is_muted else ''  # Or '' for mic-specific
+
+def toggle_mic(qtile):
+    os.system('pactl set-source-mute @DEFAULT_SOURCE@ toggle')
+
 widget_defaults = dict(
     font=DEFAULT_FONT,
     background=color_schema['bg'],
@@ -29,6 +37,7 @@ widget_defaults = dict(
     fontsize=14,
     padding=10,
 )
+
 extension_defaults = widget_defaults.copy()
 
 separator = widget.Sep(padding=10, size_percent=50, foreground=color_schema['fg3'])
@@ -75,6 +84,15 @@ widgets = [
         padding=5,
         mouse_callbacks={'Button1': lazy.spawn("pavucontrol")},
         fmt='󰕾 {}',
+    ),
+    separator,
+    widget.GenPollText(
+        name="mic_mute",
+        #cmd='bash -c "pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && echo 󰍬 || echo 🔇"',
+        func=mic_status,
+        update_interval=3,
+        fontsize=19,
+        mouse_callbacks={'Button1': lazy.spawn('pactl set-source-mute @DEFAULT_SOURCE@ toggle')},
     ),
     separator,
     widget.Net(

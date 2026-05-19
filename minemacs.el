@@ -74,17 +74,19 @@
 
 (global-set-key (kbd "C-.") #'undo)
 (global-set-key (kbd "C-,") #'undo-redo)
-(global-set-key (kbd "C-u") #'undo)
-(global-set-key (kbd "M-u") #'undo-redo)
+;;(global-set-key (kbd "C-u") #'undo)
+;;(global-set-key (kbd "M-u") #'undo-redo)
 (global-set-key (kbd "C-ä") #'undo)
 (global-set-key (kbd "C-ö") #'undo-redo)
 
+(global-set-key (kbd "C-M-y") #'consult-yank-from-kill-ring)
 (global-set-key (kbd "C-c r") #'replace-string)
 
 (global-set-key (kbd "C-c C-d") #'duplicate-region-or-line)
 (global-set-key (kbd "C-c C-z") #'run-python)
 
 (global-set-key (kbd "C-q") #'compile)
+(global-set-key (kbd "M-q") #'recompile)
 (global-set-key (kbd "C-c g g") #'revert-buffer)
 (global-set-key (kbd "C-c M-g") #'revert-buffer)
 
@@ -107,7 +109,6 @@
 (global-set-key (kbd "C-x C-<up>") #'previous-window-any-frame)
 
 (global-set-key (kbd "M-g") #'goto-line)
-
 (global-set-key (kbd "C-f") #'forward-word)
 (global-set-key (kbd "C-b") #'backward-word)
 
@@ -120,6 +121,18 @@
 (global-set-key (kbd "C-j") #'next-line)
 (global-set-key (kbd "C-k") #'previous-line)
 (global-set-key (kbd "C-l") #'forward-char)
+
+(global-set-key (kbd "M-j") #'drag-stuff-down)
+(global-set-key (kbd "M-k") #'drag-stuff-up)
+
+(global-set-key (kbd "C-M-h") #'backward-sexp)
+(global-set-key (kbd "C-M-l") #'forward-sexp)
+(global-set-key (kbd "C-M-j") #'down-list)
+(global-set-key (kbd "C-M-k") #'backward-up-list)
+(global-set-key (kbd "C-M-p") #'sp-kill-sexp)
+
+(global-set-key (kbd "C-x j") #'jump-to-register)
+
 
 (global-set-key (kbd "C-(") #'backward-paragraph)
 (global-set-key (kbd "C-)") #'forward-paragraph)
@@ -135,7 +148,8 @@
 (global-set-key (kbd "<escape>") #'god-mode-all)
 (global-set-key (kbd "C-z") #'god-mode-all)
 
-(define-key dired-mode-map (kbd "-") 'dired-up-directory)
+(with-eval-after-load 'dired
+  (define-key dired-mode-map (kbd "-") 'dired-up-directory))
 
 (with-eval-after-load 'lisp-mode
   (define-key lisp-interaction-mode-map (kbd "C-o") 'eval-print-last-sexp))

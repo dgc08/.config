@@ -35,8 +35,8 @@ nitrogen --random --set-zoom $HOME/.config/qtile/wallpapers/
 killall picom
 picom &
 
-killall redshift
-killall redshift-gtk
+killall redshift -9
+killall redshift-gtk -9
 redshift-gtk -c .config/redshift.conf &
 
 

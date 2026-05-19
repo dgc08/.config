@@ -42,9 +42,17 @@ from time import sleep
 from widgets import widgets
 from colors import *
 
+import os
+
 mod = "mod4"
 office = [mod, "shift", "control", "mod1"] #stupid office key from microsoft keyboard
 terminal = "alacritty"
+
+def refresh_mic(ctx):
+    os.system("pactl set-source-mute @DEFAULT_SOURCE@ toggle")
+    #os.system("echo e > /home/dgc/e.txt")
+    w = qtile.widgets_map["mic_mute"]
+    w.update(w.poll())
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -105,6 +113,8 @@ keys = [
     Key([mod], "x", lazy.spawn("playerctl play-pause"), desc="Play/Pause"),
     Key([mod], "c", lazy.spawn("playerctl next"), desc="Next media"),
     Key([mod, "control"], "c", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +1%"), desc="Inc volume"),
+
+    Key([mod], "g", lazy.function(refresh_mic), desc="Mute"),
 
     # Media keys
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous media"),
