@@ -38,6 +38,7 @@ then
 fi
 
 export XDG_DATA_DIRS=/usr/local/share:/usr/share:$HOME/.local/share:$XDG_DATA_DIRS
+export XDG_CURRENT_DESKTOP=qtile
 
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
@@ -48,6 +49,7 @@ export EDITOR="emacsclient -n -a emacs -c"
 #export QT_STYLE_OVERRIDE=gtk3
 
 [ -f "$HOME/.config/.profile" ] && . "$HOME/.config/.profile"
+#[ -f "$HOME/.config/etc/profile" ] && . "$HOME/.config/etc/profile"
 
 [ -f "/home/dgc/.ghcup/env" ] && . "/home/dgc/.ghcup/env" # ghcup-env
 [ -f "/home/dgc/.cargo/env" ] && . "/home/dgc/.cargo/env" # cargo-env

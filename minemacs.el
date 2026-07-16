@@ -21,6 +21,25 @@
 (when (require 'god-mode nil t)
   (god-mode))
 
+(if (package-installed-p 'vertico)
+    (progn
+      (require 'vertico)
+      (vertico-mode 1))
+  (message "Vertico not installed — run M-x package-install RET vertico RET to enable it"))
+
+;; --- Orderless: same conditional pattern ---
+(if (package-installed-p 'orderless)
+    (progn
+      (require 'orderless)
+      (setq completion-styles '(orderless basic)
+            completion-category-overrides '((file (styles basic partial-completion)))))
+  (message "Orderless not installed — run M-x package-install RET orderless RET to enable it"))
+
+(with-eval-after-load 'vertico
+  (define-key vertico-map (kbd "C-j") #'vertico-next)
+  (define-key vertico-map (kbd "C-k") #'vertico-previous)
+  (define-key vertico-map (kbd "C-o") #'vertico-exit))
+
 ;;; Keybind funcs
 (defun duplicate-line ()
   "Duplicate the current line."
@@ -198,3 +217,15 @@
   (set-face-attribute 'font-lock-variable-name-face nil :foreground gruvbox-bright_orange)
   (set-face-attribute 'font-lock-constant-face nil :foreground gruvbox-bright_purple)
   (set-face-attribute 'font-lock-builtin-face nil :foreground gruvbox-bright_red))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(magit orderless vertico)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

@@ -1,6 +1,8 @@
 [Default Applications]
 x-scheme-handler/discord=vesktop.desktop
 x-scheme-handler/discord-455712169795780630=discord-455712169795780630.desktop
+x-scheme-handler/roblox-studio-auth=roblox-studio-auth.desktop
 
 [Added Associations]
 application/zip=io.github.peazip.PeaZip.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;

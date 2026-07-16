@@ -71,7 +71,7 @@ widgets = [
     #widget.TextBox("  " + day_text, foreground="#31cccc"),
     widget.ThermalSensor(
         tag_sensor="CPUTIN",
-        threshold=60, foreground_alert='ff6000',
+        threshold=70, foreground_alert='ff6000',
     ),
     separator,
     widget.Memory(

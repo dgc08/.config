@@ -69,7 +69,8 @@ bindkey '^p' kill-line
 alias -- 'a'='tmux a || tmux'
 alias -- 'clean'='(yes | rm /tmp/* -r) & sudo pacman -Sc'
 alias -- 'ed'='emacsclient -a '\''emacs'\'''
-alias -- 'gr'='grep -HIrn'
+#alias -- 'gr'='grep -HIrn'
+alias -- 'gr'='rg --no-heading --with-filename --line-number'
 alias -- 'l'='ls -ahl -v --group-directories-first'
 alias -- 'la'='ls -ahl -v --group-directories-first'
 alias -- 'med'='emacs -q -l ~/.config/minemacs.el'
@@ -85,3 +86,6 @@ alias -- 'ytmp3'='yt-dlp -f bestaudio --extract-audio --audio-format mp3 --outpu
 
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=()
+
+# opencode
+export PATH=/home/dgc/.opencode/bin:$PATH
