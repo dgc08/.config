@@ -1,241 +1,212 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
+# Sway config — translated from qtile config
+# Original qtile config (c) 2024 Sinthoras39, based on qtile defaults
+# (Aldo Cortesi, dequis, Randall Ma, Tycho Andersen, Craig Barnes, horsik, Tao Sauvage)
 
 ### Variables
-#
-# Logo key. Use Mod1 for Alt.
 set $mod Mod4
-# Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
-# Your preferred terminal emulator
-set $term alacritty
-# Your preferred application launcher
-set $menu /home/dgc/.config/qtile/rofi.sh
+set $terminal alacritty
+set $locker swaylock
 
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+# "office" combo from the qtile config (mod+shift+ctrl+alt)
+set $office $mod+Shift+Ctrl+Mod1
 
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
+### Output / wallpaper
+# qtile picked a random wallpaper from ~/.config/qtile/wallpapers/
+# swaybg only takes one image per output, so pick one at start via a wrapper script,
+# or just point directly at a file/dir here:
+exec_always swaymsg output "*" bg $(find ~/.config/qtile/wallpapers/ -type f | shuf -n1) fill
 
-### Input configuration
-#
-# Example configuration:
-#
-#   input type:touchpad {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
+### Autostart
+# qtile's hook.subscribe.startup ran autostart_wayland.sh on wayland;
+# since sway is always Wayland, we always call that one.
+exec_always ~/.config/sway/autostart.sh
+# qtile's hook.subscribe.startup_once ran autostart_post.sh once
+exec ~/.config/qtile/autostart_post.sh
+
+### Input
 input type:keyboard {
-     xkb_layout "de,ru"
- }
-#
-# You can also configure each device individually.
-# Read `man 5 sway-input` for more information about this section.
+      xkb_layout "de,ru"
+}
+# mod+ctrl+z toggled caps:swapescape — bound as a key below via swaymsg
+
+### Basic behavior
+focus_follows_mouse yes
+mouse_warping none
+focus_on_window_activation smart
+default_border pixel 2
+default_floating_border pixel 2
+
+# border colors (approximating border_focus_stack from qtile Columns layout)
+client.focused          #d75f5f #d75f5f #ffffff #d75f5f #d75f5f
+client.focused_inactive #8f3d3d #8f3d3d #ffffff #8f3d3d #8f3d3d
+
+### Bar
+# qtile used a top bar.Bar with custom widgets; swap in waybar (or swaybar) instead.
+bar {
+    swaybar_command waybar
+}
 
 ### Key bindings
-#
-# Basics:
-#
-    # Start a terminal
-    bindsym $mod+Return exec $term
 
-    # Kill focused window
-    bindsym $mod+w kill
+# Focus movement (mod+hjkl)
+bindsym $mod+h focus left
+bindsym $mod+l focus right
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+space focus next
 
-    # Start your launcher
-    bindsym $mod+Backspace exec $menu
+# Move windows (mod+shift+hjkl)
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
+# Grow/resize windows (mod+ctrl+hjkl)
+bindsym $mod+Ctrl+h resize grow left 30px
+bindsym $mod+Ctrl+l resize grow right 30px
+bindsym $mod+Ctrl+j resize grow down 30px
+bindsym $mod+Ctrl+k resize grow up 30px
 
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
+# Reset window sizes / normalize — closest sway equivalent is re-splitting
+#bindsym $mod+n layout toggle split
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-#
-# Moving around:
-#
-    # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
+# Toggle split/unsplit stack view
+bindsym $mod+Shift+Return layout toggle split
 
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
-#
-# Workspaces:
-#
-    # Switch to workspace
-    bindsym $mod+1 workspace number 1
-    bindsym $mod+2 workspace number 2
-    bindsym $mod+3 workspace number 3
-    bindsym $mod+4 workspace number 4
-    bindsym $mod+5 workspace number 5
-    bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
-    # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
-    bindsym $mod+Shift+3 move container to workspace number 3
-    bindsym $mod+Shift+4 move container to workspace number 4
-    bindsym $mod+Shift+5 move container to workspace number 5
-    bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
-#
-# Layout stuff:
-#
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
+# Launch terminal
+bindsym $mod+Return exec $terminal
 
-    # Switch the current container between different layout styles
-    #bindsym $mod+s layout stacking
-    #bindsym $mod+w layout tabbed
-    #bindsym $mod+e layout toggle split
+# Rofi application launcher
+bindsym $mod+BackSpace exec ~/.config/qtile/rofi.sh
 
-    # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+# Screenshot
+bindsym Print exec flameshot gui
 
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+# Layout switch script (the "office" key combo)
+bindsym $office+space exec ~/.config/qtile/layout.sh
 
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+# Cycle layouts
+#bindsym $mod+Tab layout toggle split
+bindsym $mod+Tab layout toggle split tabbed
 
-    # Move focus to the parent container
-    bindsym $mod+a focus parent
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
+# Kill focused window
+bindsym $mod+w kill
 
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+# Keyboard layout toggles
+bindsym $mod+z exec setxkbmap -option
+bindsym $mod+Ctrl+z exec setxkbmap -option caps:swapescape
+# Native wayland equivalent (uncomment if setxkbmap doesn't apply under sway):
+# bindsym $mod+Ctrl+z input "type:keyboard" xkb_options caps:swapescape
 
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
-#
-# Resizing containers:
-#
-mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+# Apps
+bindsym $mod+q exec emacsclient -c
+bindsym $mod+e exec thunar
 
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+# Window state toggles
+bindsym $mod+f fullscreen toggle
+bindsym $mod+t floating toggle
+bindsym $mod+b exec swaymsg bar mode toggle
 
-    # Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+r mode "resize"
-#
-# Utilities:
-#
-    # Special keys to adjust volume via PulseAudio
-    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
-    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+# Reload config
+bindsym $mod+Ctrl+r reload
+bindsym $mod+Shift+c reload
 
-    # Special keys to control media via playerctl
-    bindsym --locked XF86AudioPlay exec playerctl play-pause
-    bindsym --locked XF86AudioPause exec playerctl play-pause
-    bindsym --locked XF86AudioPrev exec playerctl previous
-    bindsym --locked XF86AudioNext exec playerctl next
-    bindsym --locked XF86AudioStop exec playerctl stop
+# Lock screen / logout
+bindsym $mod+p exec $locker
+bindsym $mod+Ctrl+p exec swaynag -t warning -m 'Exit sway?' -b 'Yes' 'swaymsg exit'
 
-    # Special keys to adjust brightness via brightnessctl
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+# Media keys (custom, mod-based)
+bindsym $mod+y exec playerctl previous
+bindsym $mod+Ctrl+y exec pactl set-sink-volume @DEFAULT_SINK@ -1%
+bindsym $mod+x exec playerctl play-pause
+bindsym $mod+c exec playerctl next
+bindsym $mod+Ctrl+c exec pactl set-sink-volume @DEFAULT_SINK@ +1%
 
-    # Special key to take a screenshot with grim
-    bindsym Print exec grim
+# Mic mute toggle
+bindsym $mod+g exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
+# Standard media keys (XF86)
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1%
+bindsym XF86Tools exec pavucontrol
+bindsym XF86Calculator exec speedcrunch
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+# Misc utilities
+bindsym $mod+r exec flatpak run it.mijorus.smile
+bindsym $mod+v exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+### Workspaces (qtile groups "123asduiom")
+set $ws1 "1:1"
+set $ws2 "2:2"
+set $ws3 "3:3"
+set $wsa "3:a"
+set $wss "4:s"
+set $wsd "5:d"
+set $wsu "6:u"
+set $wsi "7:i"
+set $wso "8:o"
+set $wsm "9:m"
 
-include /etc/sway/config.d/*
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+a workspace $wsa
+bindsym $mod+s workspace $wss
+bindsym $mod+d workspace $wsd
+bindsym $mod+u workspace $wsu
+bindsym $mod+i workspace $wsi
+bindsym $mod+o workspace $wso
+bindsym $mod+m workspace $wsm
+
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+a move container to workspace $wsa
+bindsym $mod+Shift+s move container to workspace $wss
+bindsym $mod+Shift+d move container to workspace $wsd
+bindsym $mod+Shift+u move container to workspace $wsu
+bindsym $mod+Shift+i move container to workspace $wsi
+bindsym $mod+Shift+o move container to workspace $wso
+bindsym $mod+Shift+m move container to workspace $wsm
+
+# VT switching (control+mod1+f1..f8) — sway/wayland handles this at the session level natively,
+# no binding needed (unlike qtile's manual .when(func=...) workaround).
+
+### Floating rules (from qtile's float_rules)
+for_window [title="emacs-everywhere"] floating enable
+for_window [title="Smile"] floating enable
+for_window [app_id="confirmreset"] floating enable
+for_window [app_id="makebranch"] floating enable
+for_window [app_id="maketag"] floating enable
+for_window [app_id="ssh-askpass"] floating enable
+for_window [title="branchdialog"] floating enable
+for_window [title="pinentry"] floating enable
+
+# qtile's floats_kept_above = True
+for_window [floating] border pixel 2
+
+# default_border none
+# for_window [title="^.*"] title_format ""
+# default_border normal 0
+# default_floating_border normal 0
+
+# hide_edge_borders --i3 smart
+
+default_border normal 0
+default_floating_border normal 0
+for_window [class=".*"] border pixel 2
+for_window [app_id=".*"] border pixel 2
+
+font pango:monospace 0.01
+titlebar_border_thickness 0
+titlebar_padding 0
+smart_borders on
+#hide_edge_borders --i3 smart
+
+### Drag/resize floating windows with mouse (qtile's mouse = [Drag(...), Click(...)])
+floating_modifier $mod normal
+# left click+drag = move (default), right click+drag = resize (default in sway)
+# middle click to bring to front is automatic on focus in sway

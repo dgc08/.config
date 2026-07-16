@@ -1,0 +1,140 @@
+// Waybar config — translated from qtile widgets.py
+// Place at ~/.config/waybar/config.jsonc (or config)
+// Scripts referenced below go in ~/.config/waybar/scripts/ (chmod +x them)
+{
+    "layer": "top",
+    "position": "top",
+    "height": 24,
+    "spacing": 4,
+
+    "margin-top": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "margin-bottom": 0,
+
+    // qtile: widget.GroupBox() -> workspaces
+    // qtile: separator, widget.Systray(), separator -> tray
+    // qtile: widget.WindowName() -> window title
+    // qtile: widget.Spacer() x2 around Clock -> clock centered
+    // right side mirrors qtile order: thermal, memory, volume, mic, net, kb layout, layout, power/reboot
+    "modules-left": ["sway/workspaces", "custom/sep", "tray"],
+    "modules-center": ["sway/window", "clock"],
+    "modules-right": [
+         "temperature", "custom/sep",
+         "memory", "custom/sep",
+         "pulseaudio", "custom/sep",
+         "custom/mic-mute", "custom/sep",
+         "network", "custom/sep",
+         "sway/language", "custom/sep",
+         "custom/power",
+         "custom/reboot"
+    ],
+
+    "custom/sep": {
+        "format": "|",
+        "tooltip": false
+    },
+
+    // --- Left ---
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "sort-by-number": true,
+        "format": "{name}",
+        "persistent-workspaces": {
+            "1:1": [],
+            "2:2": [],
+            "3:3": [],
+            "6:u": [],
+            "7:i": [],
+            "8:o": []
+        }
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+
+    // --- Center ---
+    "sway/window": {
+        "max-length": 60,
+        "tooltip": false
+    },
+
+    "clock": {
+        // qtile: widget.Clock(format='%d %b %H:%M:%S')
+        "format": "{:%d %b %H:%M:%S}",
+        "interval": 1,
+        "tooltip-format": "{:%A, %d %B %Y}"
+    },
+
+    // --- Right ---
+    "temperature": {
+        // qtile: widget.ThermalSensor(tag_sensor="CPUTIN", threshold=70)
+        // Adjust hwmon-path/thermal-zone to match your sensor - check with
+        // `sensors` or `ls /sys/class/hwmon/*/name` to find CPUTINs hwmon path
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 70,
+        "format": " {temperatureC}°C",
+        "format-critical": " {temperatureC}°C"
+    },
+
+    "memory": {
+        // qtile: widget.Memory(mouse_callbacks={'Button1': spawn btop})
+        "interval": 5,
+        "on-click": "alacritty -e btop",
+        "format": " {used:0.1f}G",
+        "states": {
+           "warning": 70,
+           "critical": 90
+                   }
+    },
+
+    "pulseaudio": {
+        // qtile: widget.PulseVolume(fmt='󰕾 {}', on-click pavucontrol)
+        "format": "󰕾    {volume}%",
+        "format-muted": "󰝟 muted",
+        "on-click": "pavucontrol",
+        "scroll-step": 5
+    },
+
+    "custom/mic-mute": {
+        // qtile: widget.GenPollText(name="mic_mute", func=mic_status, update_interval=3)
+        "exec": "~/.config/waybar/mic-mute.sh",
+        "interval": 3,
+        "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+        "return-type": "",
+        "format": "{}"
+    },
+
+    "network": {
+        "format": "{ifname}",
+        "format-ethernet": "{bandwidthDownBytes} ↓↑ {bandwidthUpBytes}",
+        "tooltip-format": "{ifname}",
+        "tooltip-format-ethernet": "{ifname} ",
+        "max-length": 50,
+        "interval": 2,
+    },
+    "sway/language": {
+        // qtile: widget.KeyboardLayout(configured_keyboards=[...], display_map={...})
+        // sway/language just shows the active xkb layout name from your sway input config;
+        // set the friendly names via xkb_variant / layout labels in sway config instead of display_map
+        "format": "󰌌   {short}",
+        "tooltip-format": "{long}"
+    },
+
+    "custom/power": {
+        // qtile: widget.TextBox('󰐥', on-click poweroff)
+        "format": "󰐥",
+        "on-click": "systemctl poweroff",
+        "tooltip": false
+    },
+
+    "custom/reboot": {
+        // qtile: widget.TextBox('󰜉', on-click reboot)
+        "format": "󰜉",
+        "on-click": "systemctl reboot",
+        "tooltip": false
+    }
+}

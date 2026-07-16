@@ -1,0 +1,96 @@
+/* Waybar style — mirrors your qtile widget_defaults + GroupBox colors.
+   I don't have your colors.py contents, so swap the hex placeholders below
+   for your actual color_schema values (bg, fg, fg3, dark-yellow, dark-red, dark-gray). */
+
+* {
+    font-family: "Ubuntu", sans-serif; /* qtile: font="Ubuntu" */
+    font-size: 14px;                    /* qtile: fontsize=14 */
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: #282828; /* <- color_schema['bg'] */
+    color: #d4be98;            /* <- color_schema['fg'] */
+
+    margin: 0;
+    padding: 0;
+}
+
+/* separators — qtile: widget.Sep(padding=10, size_percent=50, foreground=fg3) */
+#workspaces,
+#tray,
+#window,
+#clock,
+#temperature,
+#memory,
+#pulseaudio,
+#custom-mic-mute,
+#network,
+#language,
+#custom-power,
+#custom-reboot {
+    padding: 0 10px;
+    margin: 0 2px;
+}
+
+#workspaces {
+    padding-left: 0;
+}
+
+/* qtile GroupBox: inactive=dark-gray, active=fg, current-screen border=dark-yellow,
+   highlight_method='text', urgent_text=dark-red */
+#workspaces button {
+    color: #cdd6f4; /* <- color_schema['dark-gray'] (inactive) */
+    font-size: 18px; /* qtile: fontsize=18 */
+    padding: 2px 2px; /* qtile: padding=1 */
+}
+
+#workspaces button.empty {
+    color: #6c7086; /* empty color <- color_schema['dark-gray'] */
+}
+
+#workspaces button.focused {
+    color: #cdd6f4; /* <- color_schema['fg'] (active) */
+    border-bottom: 2px solid #f9e2af; /* <- color_schema['dark-yellow'] */
+}
+
+#workspaces button.urgent {
+    color: #f38ba8; /* <- color_schema['dark-red'] */
+}
+
+#window {
+    font-weight: normal;
+}
+
+#clock {
+    font-weight: bold;
+}
+
+/* qtile: threshold=70, foreground_alert='ff6000' */
+#temperature.critical {
+    color: #ff6000;
+}
+
+#pulseaudio.muted {
+    color: #6c7086;
+}
+
+#custom-mic-mute {
+    font-size: 19px; /* qtile: fontsize=19 */
+}
+
+#custom-power,
+#custom-reboot {
+    font-size: 19px; /* qtile: fontsize=19 */
+}
+
+#custom-power:hover,
+#custom-reboot:hover {
+    color: #f38ba8;
+}
+
+#custom-sep {
+    color: #6c7086; /* <- color_schema['fg3'] */
+    padding: 0 4px;
+    font-size: 14px;
+}
