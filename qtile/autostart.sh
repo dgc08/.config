@@ -30,7 +30,7 @@ killall greenclip
 greenclip daemon &
 
 pactl set-sink-volume @DEFAULT_SINK@ 25%
-nitrogen --random --set-zoom $HOME/.config/qtile/wallpapers/
+#nitrogen --random --set-zoom $HOME/.config/qtile/wallpapers/
 
 killall picom
 picom &

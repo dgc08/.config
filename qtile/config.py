@@ -43,10 +43,21 @@ from widgets import widgets
 from colors import *
 
 import os
+import glob
+import random
 
 mod = "mod4"
 office = [mod, "shift", "control", "mod1"] #stupid office key from microsoft keyboard
 terminal = "alacritty"
+
+if qtile.core.name == "x11":
+    locker = "i3lock"
+elif qtile.core.name == "wayland":
+    locker = "swaylock"
+
+wallpaper_dir = os.path.expanduser("~/.config/qtile/wallpapers/")
+wallpapers = glob.glob(os.path.join(wallpaper_dir, "*"))
+wallpaper = random.choice(wallpapers) if wallpapers else None
 
 def refresh_mic(ctx):
     os.system("pactl set-source-mute @DEFAULT_SOURCE@ toggle")
@@ -104,7 +115,7 @@ keys = [
 
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
 
-    Key([mod], "p", lazy.spawn("i3lock"), desc="Lock screen"),
+    Key([mod], "p", lazy.spawn(locker), desc="Lock screen"),
     Key([mod, "control"], "p", lazy.shutdown(), desc="Log out/Shutdown Qtile"),
 
         # Keyboard shortcuts for media
@@ -174,12 +185,15 @@ for i in groups:
 
 @hook.subscribe.startup
 def autostart():
-    Popen([expanduser('~/.config/qtile/autostart.sh')])
+    if qtile.core.name == "wayland":
+        Popen([expanduser('~/.config/qtile/autostart_wayland.sh')])
+    else:
+        Popen([expanduser('~/.config/qtile/autostart.sh')])
     print("Ran reset-autostart")
 
 @hook.subscribe.startup_once
 def autostart_once():
-    Popen([expanduser('~/.config/qtile/autostart_post.sh')])
+    Popen([expanduser('~/.config/qtile/autostart_post.sh')]) # Backend agnostic
 
 layouts = [
     layout.Columns(num_colums = 3, grow_amount = 5, border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=2, initial_ratio=1.5),
@@ -206,6 +220,8 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
+        wallpaper=wallpaper,
+        wallpaper_mode="fill",  # equivalent to nitrogen's --set-zoom
         top=bar.Bar(
             widgets,
             24,
