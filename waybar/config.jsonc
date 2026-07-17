@@ -18,14 +18,15 @@
     // qtile: widget.Spacer() x2 around Clock -> clock centered
     // right side mirrors qtile order: thermal, memory, volume, mic, net, kb layout, layout, power/reboot
     "modules-left": ["sway/workspaces", "custom/sep", "tray"],
-    "modules-center": ["sway/window", "clock"],
+    "modules-center": ["sway/window"],
     "modules-right": [
+         "clock", "custom/sep",
          "temperature", "custom/sep",
          "memory", "custom/sep",
          "pulseaudio", "custom/sep",
          "custom/mic-mute", "custom/sep",
          "network", "custom/sep",
-         "sway/language", "custom/sep",
+         "custom/language", "custom/sep",
          "custom/power",
          "custom/reboot"
     ],
@@ -116,12 +117,11 @@
         "max-length": 50,
         "interval": 2,
     },
-    "sway/language": {
-        // qtile: widget.KeyboardLayout(configured_keyboards=[...], display_map={...})
-        // sway/language just shows the active xkb layout name from your sway input config;
-        // set the friendly names via xkb_variant / layout labels in sway config instead of display_map
-        "format": "󰌌   {short}",
-        "tooltip-format": "{long}"
+
+    "custom/language": {
+        "exec": "~/.config/waybar/lang.sh",
+        "tooltip": false,
+        "interval": 2,
     },
 
     "custom/power": {

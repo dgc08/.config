@@ -2,6 +2,15 @@
 # Original qtile config (c) 2024 Sinthoras39, based on qtile defaults
 # (Aldo Cortesi, dequis, Randall Ma, Tycho Andersen, Craig Barnes, horsik, Tao Sauvage)
 
+exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+exec dbus-update-activation-environment --systemd --all
+
+exec emacs --daemon
+
+# exec wl-paste --type text --watch cliphist store
+# exec wl-paste --type image --watch cliphist store
+
 ### Variables
 set $mod Mod4
 set $terminal alacritty
@@ -16,16 +25,22 @@ set $office $mod+Shift+Ctrl+Mod1
 # or just point directly at a file/dir here:
 exec_always swaymsg output "*" bg $(find ~/.config/qtile/wallpapers/ -type f | shuf -n1) fill
 
+output DP-5 {
+    mode 1920x1080@74.973Hz
+    adaptive_sync on
+}
+
 ### Autostart
 # qtile's hook.subscribe.startup ran autostart_wayland.sh on wayland;
 # since sway is always Wayland, we always call that one.
 exec_always ~/.config/sway/autostart.sh
 # qtile's hook.subscribe.startup_once ran autostart_post.sh once
-exec ~/.config/qtile/autostart_post.sh
+exec ~/.config/sway/autostart_once.sh
 
 ### Input
 input type:keyboard {
-      xkb_layout "de,ru"
+      xkb_layout "kakutr,vi,ru"
+      xkb_variant "basic,basic,phonetic_YAZHERTY"
 }
 # mod+ctrl+z toggled caps:swapescape — bound as a key below via swaymsg
 
@@ -83,7 +98,7 @@ bindsym $mod+BackSpace exec ~/.config/qtile/rofi.sh
 bindsym Print exec flameshot gui
 
 # Layout switch script (the "office" key combo)
-bindsym $office+space exec ~/.config/qtile/layout.sh
+bindsym $office+space input "type:keyboard" xkb_switch_layout next
 
 # Cycle layouts
 #bindsym $mod+Tab layout toggle split
@@ -136,7 +151,7 @@ bindsym XF86Calculator exec speedcrunch
 
 # Misc utilities
 bindsym $mod+r exec flatpak run it.mijorus.smile
-bindsym $mod+v exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+bindsym $mod+v exec "cliphist list | rofi -dmenu -p clipboard | cliphist decode | wl-copy"
 
 ### Workspaces (qtile groups "123asduiom")
 set $ws1 "1:1"

@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+source ~/.profile
+systemctl --user start wm-session.target
+qtile start

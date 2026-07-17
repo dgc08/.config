@@ -1,0 +1,85 @@
+// $XKeyboardConfig: xkeyboard-config/symbols/cu,v 1.10 2009-01-21 00:53:45 svu Exp $
+// $XFree86: xc/programs/xkbcomp/symbols/cu,v 1.2 2002/11/22 04:02:22 dawes
+// Exp $
+
+partial default alphanumeric_keys
+xkb_symbols "basic" {
+
+    //VERSION	0.1
+    //2009 by Igor Mega  <imega@imega.cz> based on US layout
+    //http://www.imega.cz/glagolitic
+
+    //all keys is defined - do not need it
+    //include "latin"
+
+    name[Group1]= "Glagolitic";
+
+    key <TLDE>	{ [ U2c59, U2c29, U2c5d, U2c2d ] };
+    key <AE01>	{ [ U2c58, U2c28, 1, U0021 ] };
+    key <AE02>	{ [ U2c57, U2c27, 2, U0040 ] };
+    key <AE03>	{ [ U2c4e, U2c1e, 3, U0023 ] };
+    key <AE04>	{ [ U2c4d, U2c1d, 4, U0024 ] };
+    key <AE05>	{ [ U2c3c, U2c0c, 5, U0025 ] };
+    key <AE06>	{ [ U2c36, U2c06, 6, U005e ] };
+    key <AE07>	{ [ U2c4f, U2c1f, 7, U0026 ] };
+    key <AE08>	{ [ U2c51, U2c21, 8, U002a ] };
+    key <AE09>	{ [ U2c50, U2c20, 9, U0028 ] };
+    key <AE10>	{ [ U2c56, U2c26, 0, U0029 ] };
+    key <AE11>	{ [ U2c54, U2c24, U002d, U005f ] };
+    key <AE12>	{ [ U0483, U1dc3, U002b, U003d ] };
+
+    key <AD01>	{ [ U2c49, U2c19, q, Q ] };
+    key <AD02>	{ [ U2c5a, U2c2a, w, W ] };
+    key <AD03>	{ [ U2c35, U2c05, e, E ] };
+    key <AD04>	{ [ U2c43, U2c13, r, R ] };
+    key <AD05>	{ [ U2c45, U2c15, t, T ] };
+    key <AD06>  { [ U2c5b, U2c2b, y, Y ] };
+    key <AD07>	{ [ U2c46, U2c16, u, U ] };
+    key <AD08>	{ [ U2c39, U2c09, i, I ] };
+    key <AD09>	{ [ U2c41, U2c11, o, O ] };
+    key <AD10>	{ [ U2c42, U2c12, p, P ] };
+
+    key <AD11>	{ [ U2c53, U2c23, U2c52, U2c22 ] };
+    key <AD12>	{ [ U2c4b, U2c1b, U2c5c, U2c2c ] };
+
+    key <AC01>	{ [ U2c30, U2c00, a, A ] };
+    key <AC02>	{ [ U2c44, U2c14, s, S ] };
+    key <AC03>	{ [ U2c34, U2c04, d, D ] };
+    key <AC04>	{ [ U2c47, U2c17, f, F ] };
+    key <AC05>	{ [ U2c33, U2c03, g, G ] };
+    key <AC06>	{ [ U2c48, U2c18, h, H ] };
+    key <AC07>	{ [ U2c3b, U2c0b, j, J ] };
+    key <AC08>	{ [ U2c3d, U2c0d, k, K ] };
+    key <AC09>	{ [ U2c3e, U2c0e, l, L ] };
+
+    key <AC10>	{ [ U003b, U003a, U2056, U10fb ] };
+    key <AC11>	{ [ U00b7, U0589, U0027, U0022 ] };
+    //
+    key <AC12>  { [  EuroSign, dead_diaeresis, NoSymbol,     NoSymbol ] };
+    key <BKSL>	{ [  U2c55, U2c25, U005c, U007c ] };
+
+    key <LSGT>  { [ backslash,        bar,        slash,     NoSymbol ] };
+
+    key <AB01>	{ [ U2c38, U2c08, z, Z ] };
+    key <AB02>	{ [ U2c37, U2c07, x, X ] };
+    key <AB03>	{ [ U2c4c, U2c1c, c, C ] };
+    key <AB04>	{ [ U2c32, U2c02, v, V ] };
+    key <AB05>	{ [ U2c31, U2c01, b, B ] };
+    key <AB06>	{ [ U2c40, U2c10, n, N ] };
+    key <AB07>	{ [ U2c3f, U2c0f, m, M ] };
+
+    key <AB08>	{ [ U002c, U2c5e, U2058, U003c ] };
+    key <AB09>	{ [ U002e, U2c2e, U2059, U003e ] };
+    key <AB10>	{ [ U2c4a, U2c1a, U002f, U003f ] };
+
+
+    key <SPCE>	{ [space, nobreakspace, space, nobreakspace ]	};
+    key <KODL>  { [comma, period, comma, period ] };
+
+    //ralt = switch
+    key <RALT> {
+        type[Group1]="ONE_LEVEL",
+        symbols[Group1] = [ ISO_Level3_Shift ]
+        };
+    modifier_map Mod5   { ISO_Level3_Shift };
+};
