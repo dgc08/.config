@@ -54,7 +54,8 @@
         },
         "Settings": {
             "enabled": true,
-            "settingsLocation": "aboveActivity"
+            "settingsLocation": "aboveActivity",
+            "includeVencordInfoWhenCopying": true
         },
         "AlwaysAnimate": {
             "enabled": false
@@ -777,6 +778,9 @@
         },
         "MusicRichPresence": {
             "enabled": false
+        },
+        "TenorGifSearch": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -789,7 +793,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1784138667833
+        "settingsSyncVersion": 1785921428872
     },
     "eagerPatches": false,
     "uiElements": {

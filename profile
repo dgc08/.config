@@ -42,6 +42,8 @@ export XDG_DATA_DIRS=/usr/local/share:/usr/share:$HOME/.local/share:$XDG_DATA_DI
 export XDG_CURRENT_DESKTOP=sway
 
 export SWAY_UNSUPPORTED_GPU=true
+export DISPLAY=:2
+export XKB_DEFAULT_LAYOUT=de
 
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus

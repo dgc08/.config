@@ -25,14 +25,11 @@ xss-lock -n /usr/share/doc/xss-lock/dim-screen.sh -- swaylock -n &
 setxkbmap -option caps:swapescape
 setxkbmap -layout "kakutr"
 
-killall dunst
-dunst &
+killall mako
+mako &
 
 killall playerctld
 playerctld daemon &
-
-wl-paste --type text --watch cliphist store
-wl-paste --type image --watch cliphist store
 
 pactl set-sink-volume @DEFAULT_SINK@ 30%
 #nitrogen --random --set-zoom $HOME/.config/qtile/wallpapers/
@@ -45,6 +42,7 @@ killall redshift-gtk
 killall wlsunset
 killall gammastep
 gammastep -c ~/.config/sway/gammastep.conf
+#gammastep -O 3200
 
 #echo " Ran QTile autostart, reached end successfully" >> .log
 #$(date +"%r %a %d %h %y)

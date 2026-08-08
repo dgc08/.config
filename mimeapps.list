@@ -2,7 +2,23 @@
 x-scheme-handler/discord=vesktop.desktop
 x-scheme-handler/discord-455712169795780630=discord-455712169795780630.desktop
 x-scheme-handler/roblox-studio-auth=roblox-studio-auth.desktop
+x-scheme-handler/mailto=userapp-Thunderbird-BABHS3.desktop
+x-scheme-handler/mid=userapp-Thunderbird-BABHS3.desktop
+message/rfc822=userapp-Thunderbird-BABHS3.desktop
+x-scheme-handler/webcal=userapp-Thunderbird-O6EGS3.desktop
+x-scheme-handler/webcals=userapp-Thunderbird-O6EGS3.desktop
+text/calendar=userapp-Thunderbird-O6EGS3.desktop
+application/x-extension-ics=userapp-Thunderbird-O6EGS3.desktop
+x-scheme-handler/net.thunderbird=userapp-Thunderbird-WCMIS3.desktop
 
 [Added Associations]
 application/zip=io.github.peazip.PeaZip.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;
+x-scheme-handler/mailto=userapp-Thunderbird-BABHS3.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-BABHS3.desktop;
+message/rfc822=userapp-Thunderbird-BABHS3.desktop;
+x-scheme-handler/webcal=userapp-Thunderbird-O6EGS3.desktop;
+x-scheme-handler/webcals=userapp-Thunderbird-O6EGS3.desktop;
+text/calendar=userapp-Thunderbird-O6EGS3.desktop;
+application/x-extension-ics=userapp-Thunderbird-O6EGS3.desktop;
+x-scheme-handler/net.thunderbird=userapp-Thunderbird-WCMIS3.desktop;

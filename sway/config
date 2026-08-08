@@ -2,11 +2,25 @@
 # Original qtile config (c) 2024 Sinthoras39, based on qtile defaults
 # (Aldo Cortesi, dequis, Randall Ma, Tycho Andersen, Craig Barnes, horsik, Tao Sauvage)
 
-exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
-exec dbus-update-activation-environment --systemd --all
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+xwayland disable
+exec xwayland-satellite :2 &
+exec_always {
+    export DISPLAY=:2
+    systemctl --user set-environment DISPLAY=:2
+    hash dbus-update-activation-environment 2>/dev/null && \
+        dbus-update-activation-environment DISPLAY
+}
 
 exec emacs --daemon
+
+exec wl-clip-persist --clipboard regular
+
+# Saves copy history for your clipboard menu
+exec wl-paste --type text --watch cliphist store
+exec wl-paste --type image --watch cliphist store
 
 # exec wl-paste --type text --watch cliphist store
 # exec wl-paste --type image --watch cliphist store
@@ -25,10 +39,27 @@ set $office $mod+Shift+Ctrl+Mod1
 # or just point directly at a file/dir here:
 exec_always swaymsg output "*" bg $(find ~/.config/qtile/wallpapers/ -type f | shuf -n1) fill
 
-output DP-5 {
-    mode 1920x1080@74.973Hz
+output DP-4 {
+    mode 3840x2160@59.997Hz
     adaptive_sync on
+    scale 2
+    scale_filter smart
+    position 1920 0
 }
+
+output DP-5 {
+    mode 1920x1080@60Hz
+    adaptive_sync on
+    scale 1
+    position 0 0
+}
+
+set $m1 DP-4
+set $m2 DP-5
+
+focus output $m1
+
+output DP-5 disable
 
 ### Autostart
 # qtile's hook.subscribe.startup ran autostart_wayland.sh on wayland;
@@ -46,7 +77,7 @@ input type:keyboard {
 
 ### Basic behavior
 focus_follows_mouse yes
-mouse_warping none
+mouse_warping output
 focus_on_window_activation smart
 default_border pixel 2
 default_floating_border pixel 2
@@ -68,7 +99,12 @@ bindsym $mod+h focus left
 bindsym $mod+l focus right
 bindsym $mod+j focus down
 bindsym $mod+k focus up
-bindsym $mod+space focus next
+
+# Cycle forward through tabs/windows
+bindsym $mod+space focus next sibling
+
+# (Optional) Cycle backward through tabs/windows
+bindsym $mod+Shift+space focus prev
 
 # Move windows (mod+shift+hjkl)
 bindsym $mod+Shift+h move left
@@ -82,8 +118,12 @@ bindsym $mod+Ctrl+l resize grow right 30px
 bindsym $mod+Ctrl+j resize grow down 30px
 bindsym $mod+Ctrl+k resize grow up 30px
 
-# Reset window sizes / normalize — closest sway equivalent is re-splitting
-#bindsym $mod+n layout toggle split
+
+bindsym $mod+n output DP-5 toggle
+bindsym $mod+F1 output DP-4 mode 3840x2160@59.997Hz scale 2
+bindsym $mod+F2 output DP-4 mode 3840x2160@179.977Hz scale 2
+bindsym $mod+F3 output DP-4 mode 1920x1080@120Hz scale 1
+bindsym $mod+F4 output DP-4 mode 1920x1080@359.954Hz scale 1
 
 # Toggle split/unsplit stack view
 bindsym $mod+Shift+Return layout toggle split
@@ -95,7 +135,8 @@ bindsym $mod+Return exec $terminal
 bindsym $mod+BackSpace exec ~/.config/qtile/rofi.sh
 
 # Screenshot
-bindsym Print exec flameshot gui
+#bindsym Print exec flameshot gui
+bindsym Print exec grim -g "$(slurp)" -t ppm - | satty --filename - --fullscreen
 
 # Layout switch script (the "office" key combo)
 bindsym $office+space input "type:keyboard" xkb_switch_layout next
@@ -106,6 +147,7 @@ bindsym $mod+Tab layout toggle split tabbed
 
 # Kill focused window
 bindsym $mod+w kill
+bindsym $mod+Ctrl+w exec kill -9 $(swaymsg -t get_tree | jq '.. | select(.type?) | select(.focused==true) | .pid')
 
 # Keyboard layout toggles
 bindsym $mod+z exec setxkbmap -option
@@ -120,7 +162,8 @@ bindsym $mod+e exec thunar
 # Window state toggles
 bindsym $mod+f fullscreen toggle
 bindsym $mod+t floating toggle
-bindsym $mod+b exec swaymsg bar mode toggle
+
+bindsym Mod4+b exec killall -SIGUSR1 waybar
 
 # Reload config
 bindsym $mod+Ctrl+r reload
@@ -164,6 +207,18 @@ set $wsu "6:u"
 set $wsi "7:i"
 set $wso "8:o"
 set $wsm "9:m"
+
+workspace $ws1 output $m1
+workspace $ws2 output $m1
+workspace $ws3 output $m1
+workspace $wsa output $m1
+workspace $wss output $m2
+workspace $wsd output $m1
+workspace $wsu output $m1
+workspace $wsi output $m1
+workspace $wso output $m2
+workspace $wsm output $m2
+
 
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
