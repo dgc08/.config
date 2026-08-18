@@ -40,7 +40,7 @@ set $office $mod+Shift+Ctrl+Mod1
 exec_always swaymsg output "*" bg $(find ~/.config/qtile/wallpapers/ -type f | shuf -n1) fill
 
 output DP-4 {
-    mode 3840x2160@59.997Hz
+    mode 3840x2160@179.977Hz
     adaptive_sync on
     scale 2
     scale_filter smart

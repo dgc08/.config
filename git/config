@@ -14,3 +14,4 @@
 [safe]
 	directory = /usr/bin/qtile
 	directory = /Library/opt/xone
+	directory = /mnt/1/anderes/bank
