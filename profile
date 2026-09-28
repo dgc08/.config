@@ -42,12 +42,25 @@ export XDG_DATA_DIRS=/usr/local/share:/usr/share:$HOME/.local/share:$XDG_DATA_DI
 export XDG_CURRENT_DESKTOP=sway
 
 export SWAY_UNSUPPORTED_GPU=true
-export DISPLAY=:2
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    #echo "Running on Wayland"
+    export DISPLAY=:2
+
+    export GTK_IM_MODULE=fcitx
+    export QT_IM_MODULE=fcitx
+    export XMODIFIERS=@im=fcitx
+
+else
+    #echo "Running on X11 or TTY"
+    export GDK_SCALE=2
+    export GDK_DPI_SCALE=0.5
+    export QT_SCALE_FACTOR=2
+    export QT_AUTO_SCREEN_SCALE_FACTOR=1
+fi
+
 export XKB_DEFAULT_LAYOUT=de
 
-export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=ibus
+
 export QT_QPA_PLATFORMTHEME=qt5ct
 export XIM_PROGRAM="/usr/bin/ibus-daemon -drx"
 export EDITOR="emacsclient -n -a emacs -c"

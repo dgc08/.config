@@ -20,7 +20,10 @@
 # exec ./i3-toolwait -- vesktop --disable-features=WebRtcAllowInputVolumeAdjustment &
 
 swaymsg "workspace 6:u; exec pwvucontrol" &
-swaymsg "workspace 6:u; exec alacritty -e /usr/bin/btop" &
+swaymsg "workspace 6:u; exec alacritty -T 'btop' -e /usr/bin/btop" &
 swaymsg "workspace 2:2; exec emacsclient -c" &
-swaymsg "workspace 1:1; exec brave --password-store=basic" &
-swaymsg "workspace 3:3; exec vesktop --disable-features=WebRtcAllowInputVolumeAdjustment" &
+swaymsg "workspace 8:o; exec spotify-launcher" &
+swaymsg "workspace 1:1; exec brave --ozone-platform=wayland --password-store=basic" &
+#swaymsg "workspace 3:3; exec vesktop --disable-features=WebRtcAllowInputVolumeAdjustment" &
+#/usr/bin/discord --disable-features=WebRtcAllowInputVolumeAdjustment ELECTRON_OZONE_PLATFORM_HINT=x11  &
+#/usr/bin/discord --enable-features=UseOzonePlatform --ozone-platform=wayland --disable-features=WebRtcAllowInputVolumeAdjustment &

@@ -1,7 +1,3 @@
-# Sway config — translated from qtile config
-# Original qtile config (c) 2024 Sinthoras39, based on qtile defaults
-# (Aldo Cortesi, dequis, Randall Ma, Tycho Andersen, Craig Barnes, horsik, Tao Sauvage)
-
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
@@ -13,6 +9,8 @@ exec_always {
     hash dbus-update-activation-environment 2>/dev/null && \
         dbus-update-activation-environment DISPLAY
 }
+
+exec_always --no-startup-id "systemctl --user import-environment GTK_IM_MODULE QT_IM_MODULE XMODIFIERS"
 
 exec emacs --daemon
 
@@ -40,7 +38,7 @@ set $office $mod+Shift+Ctrl+Mod1
 exec_always swaymsg output "*" bg $(find ~/.config/qtile/wallpapers/ -type f | shuf -n1) fill
 
 output DP-4 {
-    mode 3840x2160@179.977Hz
+    mode 3840x2160@175.977Hz
     adaptive_sync on
     scale 2
     scale_filter smart
@@ -121,7 +119,7 @@ bindsym $mod+Ctrl+k resize grow up 30px
 
 bindsym $mod+n output DP-5 toggle
 bindsym $mod+F1 output DP-4 mode 3840x2160@59.997Hz scale 2
-bindsym $mod+F2 output DP-4 mode 3840x2160@179.977Hz scale 2
+bindsym $mod+F2 output DP-4 mode 3840x2160@175.977Hz scale 2
 bindsym $mod+F3 output DP-4 mode 1920x1080@120Hz scale 1
 bindsym $mod+F4 output DP-4 mode 1920x1080@359.954Hz scale 1
 
@@ -136,7 +134,8 @@ bindsym $mod+BackSpace exec ~/.config/qtile/rofi.sh
 
 # Screenshot
 #bindsym Print exec flameshot gui
-bindsym Print exec grim -g "$(slurp)" -t ppm - | satty --filename - --fullscreen
+#bindsym Print exec grim -g "$(slurp)" -t ppm - | satty --filename - --fullscreen
+bindsym Print exec ~/.config/sway/screenshot.sh
 
 # Layout switch script (the "office" key combo)
 bindsym $office+space input "type:keyboard" xkb_switch_layout next
@@ -280,3 +279,29 @@ smart_borders on
 floating_modifier $mod normal
 # left click+drag = move (default), right click+drag = resize (default in sway)
 # middle click to bring to front is automatic on focus in sway
+# --- Shadows ---
+# Replaces Picom's shadow, shadow-radius, shadow-opacity
+# shadows enable
+# shadow_blur_radius 12
+# shadow_color #0000007F
+
+# # Exclude specific windows from shadows (like Picom's shadow-exclude)
+# for_window [app_id="mako"] shadows disable
+
+# # --- Background Blur ---
+# # Replaces Picom's blur-method, blur-strength, etc.
+# blur enable
+# blur_xray disable
+# blur_passes 3
+# blur_radius 5
+
+# # Blur layer surfaces like Waybar or Rofi
+# layer_effects "waybar" blur enable; corner_radius 0
+# layer_effects "rofi" blur enable; corner_radius 10
+
+# # --- Dimming & Opacity ---
+# default_dim_inactive 0.0
+# for_window [app_id="Alacritty"] opacity 0.90
+
+assign [app_id="spotify"] workspace "8:o"
+assign [app_id="discord"] workspace "3:3"

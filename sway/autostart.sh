@@ -12,8 +12,11 @@ export XMODIFIERS=@im=ibus
 
 /usr/bin/lxqt-policykit-agent &
 
-killall ibus-daemon
-ibus-daemon --type=wayland -drx &
+killall fcitx5
+fcitx5 -d
+
+# killall ibus-daemon
+# ibus-daemon -drx &
 #ibus start
 
 #nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"

@@ -89,3 +89,4 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS+=()
 
 # opencode
 export PATH=/home/dgc/.opencode/bin:$PATH
+export PATH=~/.npm-global/bin:$PATH

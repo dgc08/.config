@@ -14,5 +14,10 @@
         "de-DE",
         "de"
     ],
-    "hardwareVideoAcceleration": false
+    "hardwareVideoAcceleration": false,
+    "minimizeToTray": false,
+    "tray": true,
+    "staticTitle": true,
+    "enableMenu": false,
+    "customTitleBar": false
 }
