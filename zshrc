@@ -90,3 +90,9 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS+=()
 # opencode
 export PATH=/home/dgc/.opencode/bin:$PATH
 export PATH=~/.npm-global/bin:$PATH
+
+conda() {
+    unset -f conda
+    eval "$('/scn/anaconda3/bin/conda' 'shell.zsh' 'hook')"
+    conda "$@"
+}
